@@ -4,12 +4,12 @@ An (under development) Python library for using the [Oracle Service Cloud REST A
 
 ## Todo
 I am looking to implement the following items soon:
-	1. OSCPythonQueryResultsSet, an object for performing multiple queries
-	2. OSCPythonAnalyticsReportResults, an object for running Analytics Reports
-	3. Test suite (in progress)
-	4. Travis CI for continuous integration
-	5. Code Climate for code quality
-	6. Documentation
+1. OSCPythonQueryResultsSet, an object for performing multiple queries
+2. OSCPythonAnalyticsReportResults, an object for running Analytics Reports
+3. Test suite (in progress)
+4. Travis CI for continuous integration
+5. Code Climate for code quality
+6. Documentation
 
 
 ## Compatibility
@@ -27,8 +27,7 @@ You can use this Python Library for basic scripting and microservices. The main 
 1. [Simple configuration](#client-configuration)
 2. [Running ROQL queries](oscpythonqueryresults-example)
 3. Convenience methods for Analytics filters and setting dates
-	1. ['arrf', an analytics report results filter](#arrf--analytics-report-results-filter)
-	2. ['dti', converts a date string to ISO8601 format](#dti--date-to-iso8601)
+	1. ['dti', converts a date string to ISO8601 format](#dti--date-to-iso8601)
 4. Basic CRUD Operations via HTTP Methods
 	1. [Create => Post](#create)
 	2. [Read => Get](#read)
