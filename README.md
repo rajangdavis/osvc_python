@@ -25,7 +25,7 @@ All of the HTTP methods should work on any version of Oracle Service Cloud since
 You can use this Python Library for basic scripting and microservices. The main features that work to date are as follows:
 
 1. [Simple configuration](#client-configuration)
-2. [Running ROQL queries](#oscPythonqueryresults-example)
+2. [Running ROQL queries](oscpythonqueryresults-example)
 3. Convenience methods for Analytics filters and setting dates
 	1. ['arrf', an analytics report results filter](#arrf--analytics-report-results-filter)
 	2. ['dti', converts a date string to ISO8601 format](#dti--date-to-iso8601)
@@ -63,13 +63,13 @@ from 'osc_python' import OSCPythonClient
 
 # Configuration Client
 rn_client = OSCPythonClient(env('OSC_ADMIN'),
-			    			env('OSC_PASSWORD'),
-			    			env('OSC_SITE'))
+		            env('OSC_PASSWORD'),
+			    env('OSC_SITE'))
 
 # Optional Configuration Settings
-# rn_client.change_version('v1.4') 	#=> Changes REST API version, default is 'v1.3'
+# rn_client.change_version('v1.4') 		#=> Changes REST API version, default is 'v1.3'
 # rn_client.ssl_off()				#=> Turns off SSL verification
-# rn_client.suppress_rules()		#=> Supresses Business Rules
+# rn_client.suppress_rules()			#=> Supresses Business Rules
 rn_client.is_demo() 				#=> Changes 'custhelp' domain to 'rightnowdemo'
 ```
 
@@ -77,27 +77,18 @@ rn_client.is_demo() 				#=> Changes 'custhelp' domain to 'rightnowdemo'
 
 
 
-## OSCPython::QueryResults example
+## OSCPythonQueryResults example
 
 This is for running one ROQL query. Whatever is allowed by the REST API (limits and sorting) is allowed with this library.
 
 OSCPythonQueryResults only has one function: 'query', which takes an OSCPythonClient object and string query (example below).
 
 ```python
-# NOTE: Make sure to put your queries WRAPPED in doublequotes("")
-# this is because when Python converts the queries into a URI
-# the REST API does not like it when the queries are WRAPPED in single quotes ('')
-
-# For example
-# "parent is null and lookupName!='Unsure'" => great!
-# 'parent is null and lookupName!="Unsure"' => don't do this
-# it will spit back an error from the REST API!
-
 from 'osc_python' import OSCPythonClient,OSCPythonQueryResults
 
 rn_client = OSCPythonClient(env('OSC_ADMIN'),
-			    			env('OSC_PASSWORD'),
-			    			env('OSC_SITE'))
+			    env('OSC_PASSWORD'),
+    			    env('OSC_SITE'))
 rn_client.is_demo()
 
 q = OSCPythonQueryResults(rn_client)
@@ -106,7 +97,7 @@ results = q.query(query)
 
 print results.status_code 			#=> 200
 print results.content 				#=> JSON representation of results
-print results.pretty_content 		#=> Pretty printed JSON String of results
+print results.pretty_content	 		#=> Pretty printed JSON String of results
 
 
 ```
@@ -142,8 +133,8 @@ dti("January 1st") # => 2017-01-01T00:00:00-08:00 # => 12:00 AM, January First o
 from osc_python import env,OSCPythonClient, OSCPythonConnect
 
 rn_client = OSCPythonClient(env('OSC_ADMIN'),
-			    			env('OSC_PASSWORD'),
-			    			env('OSC_SITE'))
+			    env('OSC_PASSWORD'),
+			    env('OSC_SITE'))
 rn_client.is_demo()
 
 opc = OSCPythonConnect(rn_client)
@@ -176,13 +167,13 @@ print res.content # => JSON body
 ```python
 #### OSCPythonConnect.get( <client>, optional (<url>/<id>/...<params>) )
 #### returns a OSCPythonResponse object
-# Here's how you could get a list of ServiceProducts
+# Here's how you could get an instance of ServiceProducts
 
 from osc_python import env,OSCPythonClient, OSCPythonConnect
 
 rn_client = OSCPythonClient(env('OSC_ADMIN'),
-			    			env('OSC_PASSWORD'),
-			    			env('OSC_SITE'))
+			    env('OSC_PASSWORD'),
+			    env('OSC_SITE'))
 rn_client.is_demo()
 
 opc = OSCPythonConnect(rn_client)
@@ -219,8 +210,8 @@ print res.pretty_content # => Pretty Printed JSON response
 ```python
 #### OSCPythonConnect.patch(<url>, <json_data> )
 #### returns a OSCPythonResponse object
-# Here's how you could update the previously created ServiceProduct object
-# using Python variables, arrays, and hashes
+# Here's how you could update an Answer object
+# using Python variables, lists, and dicts
 # to set field information
 from osc_python import env,OSCPythonClient, OSCPythonConnect
 
@@ -250,18 +241,18 @@ print updated_answer.content #=> Returns as JSON
 ```python
 #### OSCPythonConnect.delete(<url> )
 #### returns a OSCPythonResponse object
-# Here's how you could delete the previously updated ServiceProduct object
+# Here's how you could delete an Answer object
 # and OSCPythonConnect classes
 
 from osc_python import env,OSCPythonClient, OSCPythonConnect
 
 rn_client = OSCPythonClient(env('OSC_ADMIN'),
-			    			env('OSC_PASSWORD'),
-			    			env('OSC_SITE'))
+			    env('OSC_PASSWORD'),
+			    env('OSC_SITE'))
 rn_client.is_demo()
 
 opc = OSCPythonConnect(rn_client)
-deleted_answer = opc.delete(created_answer_url)
+deleted_answer = opc.delete('answers/154')
 print deleted_answer.status_code #=> 200
 
 ```
