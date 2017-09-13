@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: osc-python
+Version: 0.1
+Summary: An unofficial Python ORM on top of the Oracle Cloud Services (fka RightNow Technologies) REST API
+Home-page: http://github.com/rajangdavis/osc_python
+Author: Rajan Davis
+Author-email: rajangdavis@gmail.com
+License: MIT
+Description: UNKNOWN
+Platform: UNKNOWN
