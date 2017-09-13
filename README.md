@@ -88,7 +88,6 @@ from 'osc_python' import OSCPythonClient,OSCPythonQueryResults
 rn_client = OSCPythonClient(env('OSC_ADMIN'),
 			    env('OSC_PASSWORD'),
     			    env('OSC_SITE'))
-rn_client.is_demo()
 
 q = OSCPythonQueryResults(rn_client)
 query = "DESCRIBE Answers"
@@ -134,7 +133,6 @@ from osc_python import env,OSCPythonClient, OSCPythonConnect
 rn_client = OSCPythonClient(env('OSC_ADMIN'),
 			    env('OSC_PASSWORD'),
 			    env('OSC_SITE'))
-rn_client.is_demo()
 
 opc = OSCPythonConnect(rn_client)
 
@@ -173,7 +171,6 @@ from osc_python import env,OSCPythonClient, OSCPythonConnect
 rn_client = OSCPythonClient(env('OSC_ADMIN'),
 			    env('OSC_PASSWORD'),
 			    env('OSC_SITE'))
-rn_client.is_demo()
 
 opc = OSCPythonConnect(rn_client)
 res = opc.get('serviceProducts/164')
@@ -215,10 +212,9 @@ print res.pretty_content # => Pretty Printed JSON response
 from osc_python import env,OSCPythonClient, OSCPythonConnect
 
 rn_client = OSCPythonClient(env('OSC_ADMIN'),
-			    			env('OSC_PASSWORD'),
-			    			env('OSC_SITE'))
-rn_client.is_demo()
-
+			    env('OSC_PASSWORD'),
+			    env('OSC_SITE'))
+			    
 opc = OSCPythonConnect(rn_client)
 
 # Patch example
@@ -248,7 +244,6 @@ from osc_python import env,OSCPythonClient, OSCPythonConnect
 rn_client = OSCPythonClient(env('OSC_ADMIN'),
 			    env('OSC_PASSWORD'),
 			    env('OSC_SITE'))
-rn_client.is_demo()
 
 opc = OSCPythonConnect(rn_client)
 deleted_answer = opc.delete('answers/154')
