@@ -37,9 +37,9 @@ You can use this Python Library for basic scripting and microservices. The main 
 ## Installing Python (for Windows)
 [Try this link.](https://github.com/BurntSushi/nfldb/wiki/Python-&-pip-Windows-installation)
 The link covers how to:
-	1. Install Python
-	2. Add Python to your PATH (expose it to the command line)
-	3. How to install pip, a Python package manager
+1. Install Python
+2. Add Python to your PATH (expose it to the command line)
+3. How to install pip, a Python package manager
 
 ## Installation
 
