@@ -12,8 +12,8 @@ class OSCPythonConnect:
 		client = self.client
 		get_url = self.__url_format(resource_url)
 		response = requests.get(get_url,
-								auth=(client.username,client.password),
-								verify=client.ssl_verify)
+					auth=(client.username,client.password),
+					verify=client.ssl_verify)
 		return OSCPythonResponse(response)
 
 	def post(self,resource_url,json_data={}):
@@ -21,9 +21,9 @@ class OSCPythonConnect:
 		json_data = json.dumps(json_data)
 		post_url = self.__url_format(resource_url)
 		response = requests.post(post_url,
-								 auth=(client.username,client.password),
-								 data=json_data,
-								 verify=client.ssl_verify)
+					 auth=(client.username,client.password),
+					 data=json_data,
+					 verify=client.ssl_verify)
 		return OSCPythonResponse(response)
 
 	def patch(self,resource_url,json_data={}):
@@ -32,17 +32,17 @@ class OSCPythonConnect:
 		patch_url = self.__url_format(resource_url)
 		headers = self.__headers_check(patch=True)
 		return requests.post(patch_url,
-							 auth=(client.username,client.password),
-							 data=json_data,
-							 headers=headers,
-							 verify=client.ssl_verify)
+				     auth=(client.username,client.password),
+				     data=json_data,
+				     headers=headers,
+				     verify=client.ssl_verify)
 
 	def delete(self,resource_url):
 		client = self.client
 		delete_url = self.__url_format(resource_url)
 		return requests.delete(delete_url,
-							   auth=(client.username,client.password),
-							   verify=client.ssl_verify)
+				       auth=(client.username,client.password),
+				       verify=client.ssl_verify)
 
 	
 	# Private Methods
