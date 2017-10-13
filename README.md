@@ -55,8 +55,8 @@ This is helpful if you need to interact with multiple interfaces or set differen
 
 ```python
 
-# Configuration is as simple as requiring the gem
-# and writing a Python block
+# Configuration is as simple as importing the package
+# and entering in credentials
 
 from 'osc_python' import OSCPythonClient
 
