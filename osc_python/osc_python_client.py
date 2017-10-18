@@ -1,8 +1,8 @@
 class OSCPythonClient:
-	def __init__(self,username,password,interface):
-		self.interface = interface
-		self.username = username
-		self.password = password
+	def __init__(self,**kwargs):
+		self.interface = kwargs.get('interface','')
+		self.username = kwargs.get('username','')
+		self.password = kwargs.get('password','')
 		self.version = 'v1.3'
 		self.ssl_verify = True
 		self.rule_suppression = False

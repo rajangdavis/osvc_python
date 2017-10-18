@@ -7,9 +7,11 @@ from osc_python import env
 class TestOSCPythonConnect(unittest.TestCase):
 	
 	def setUp(self):
-		self.rn_client = OSCPythonClient(env('OSC_ADMIN'),
-    									 env('OSC_PASSWORD'),
-    									 env('OSC_SITE'))
+		self.rn_client = OSCPythonClient(
+			username=env('OSC_ADMIN'),
+			password=env('OSC_PASSWORD'),
+			interface=env('OSC_SITE')
+		)
 		self.rn_client.is_demo()
 	
 	def test_get(self):

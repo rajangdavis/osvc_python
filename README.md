@@ -61,9 +61,11 @@ This is helpful if you need to interact with multiple interfaces or set differen
 from 'osc_python' import OSCPythonClient
 
 # Configuration Client
-rn_client = OSCPythonClient(env('OSC_ADMIN'),
-		            env('OSC_PASSWORD'),
-			    env('OSC_SITE'))
+self.rn_client = OSCPythonClient(
+		username=env('OSC_ADMIN'),
+		password=env('OSC_PASSWORD'),
+		interface=env('OSC_SITE')
+	)
 
 # Optional Configuration Settings
 # rn_client.change_version('v1.4') 		#=> Changes REST API version, default is 'v1.3'

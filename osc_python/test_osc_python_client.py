@@ -6,9 +6,11 @@ from osc_python import env
 class TestOSCPythonClient(unittest.TestCase):
 	
 	def setUp(self):
-		self.rn_client = OSCPythonClient(env('OSC_ADMIN'),
-    									 env('OSC_PASSWORD'),
-    									 env('OSC_SITE'))
+		self.rn_client = OSCPythonClient(
+			username=env('OSC_ADMIN'),
+			password=env('OSC_PASSWORD'),
+			interface=env('OSC_SITE')
+		)
 	
 	def test_change_version(self):
 		self.rn_client.change_version('v1.4')
