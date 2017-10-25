@@ -33,7 +33,10 @@ class OSCPythonQueryResults:
 			for item in response.content['items']:
 				results_array = self.__iterate_through_rows(item)
 				final_arr.append(results_array)
-			return final_arr
+			if len(final_arr) == 1 and type(final_arr[0]).__name__ is 'list':
+				return final_arr
+			else:
+				return [result for results in final_arr for result in results]
 
 	def __iterate_through_rows(self,item):
 		results_list = list()
