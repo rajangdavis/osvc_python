@@ -37,7 +37,7 @@ class OSCPythonQueryResults:
 	
 	def __results_adjustment(self,response):
 		if len(final_arr) == 1 and type(final_arr[0]).__name__ is 'list':
-				return final_arr
+			return final_arr
 		else:
 			return [result for results in final_arr for result in results]
 
