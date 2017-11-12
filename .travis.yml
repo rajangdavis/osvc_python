@@ -1,3 +1,6 @@
+env:
+  global:
+    - CC_TEST_REPORTER_ID=2d27b534f53b14fedb93e4ca11462c8381df962306561cfd87da66c04b0b00bf
 language: python
 python:
   - "2.6"
@@ -5,6 +8,12 @@ python:
 # command to install dependencies
 install:
   - pip install -r requirements.txt
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 # command to run tests
 script:
-  - python -m unittest discover # or py.test for Python versions 3.5 and below
+  - pytest # or py.test for Python versions 3.5 and below
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
