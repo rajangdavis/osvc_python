@@ -3,7 +3,6 @@ env:
     - CC_TEST_REPORTER_ID=2d27b534f53b14fedb93e4ca11462c8381df962306561cfd87da66c04b0b00bf
 language: python
 python:
-  - "2.6"
   - "2.7"
 # command to install dependencies
 install:
