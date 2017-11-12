@@ -5,7 +5,7 @@ from osc_python_response import OSCPythonResponse
 
 class OSCPythonQueryResults:
 	def __init__(self,client):
-		self.client = self.__check_client(client)
+		self.client = client
 
 	def query(self,query):
 		client = self.client
@@ -16,26 +16,17 @@ class OSCPythonQueryResults:
 		return OSCPythonResponse(results,query_results=results_list)
 
 	# Private Methods
-	def __check_client(self,client):
-		if client.username == None:
-			print "username is empty"
-		elif client.password == None:
-			print "password is empty"
-		elif client.interface == None:
-			print "interface is empty"
-		return client
-
 	def __results_to_list(self,response):
 		if response.status_code not in [200,201]:
 			return response
 		else:
 			final_arr = list()
-			for item in response.content['items']:
+			for item in response.body['items']:
 				results_array = self.__iterate_through_rows(item)
 				final_arr.append(results_array)
-			return __results_adjustment(final_arr)
+			return self.__results_adjustment(final_arr)
 	
-	def __results_adjustment(self,response):
+	def __results_adjustment(self,final_arr):
 		if len(final_arr) == 1 and type(final_arr[0]).__name__ is 'list':
 			return final_arr
 		else:

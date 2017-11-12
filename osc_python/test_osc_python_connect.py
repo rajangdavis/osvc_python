@@ -19,5 +19,5 @@ class TestOSCPythonConnect(unittest.TestCase):
 		self.assertIsInstance(opc,OSCPythonConnect)
 		response = opc.get('answers')
 		self.assertEquals(response.status_code,200)
-		self.assertIsInstance(response.content,dict)
-		self.assertIsInstance(response.pretty_content,str)
+		self.assertIsInstance(response.body,dict)
+		self.assertIsInstance(response.pretty,str)

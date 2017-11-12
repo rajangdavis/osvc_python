@@ -1,4 +1,5 @@
 [run]
 omit =
-    # omit this single file
-    osc_python/test*
+    osc_python/test_osc_python_client.py
+    osc_python/test_osc_python_connect.py
+    osc_python/test_osc_python_query_results.py
