@@ -15,4 +15,6 @@ before_script:
 script:
   - pytest # or py.test for Python versions 3.5 and below
 after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT -t coverage.py < coverage.xml -d
+  - ls -a
+  - cd ./cc-test-reporter && ls -a 
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT -t coverage.py -d
