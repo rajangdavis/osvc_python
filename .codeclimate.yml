@@ -19,6 +19,8 @@ engines:
 # http://docs.codeclimate.com/article/166-excluding-files-folders
 #
 exclude_paths:
-  - build/
-  - dist/
-  - osc_python.egg-info/
+  - "build/"
+  - "dist/"
+  - "osc_python.egg-info/"
+  - "**.pyc"
+  - "osc_python/test*"
