@@ -1,7 +1,10 @@
 # OSCPython
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/7be0820423b00dade9c8/maintainability)](https://codeclimate.com/github/rajangdavis/osc_python/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/7be0820423b00dade9c8/test_coverage)](https://codeclimate.com/github/rajangdavis/osc_python/test_coverage)
 [![Build Status](https://travis-ci.org/rajangdavis/osc_python.svg?branch=master)](https://travis-ci.org/rajangdavis/osc_python)
+[![PyPI version](https://badge.fury.io/py/osc_python.svg)](https://badge.fury.io/py/osc_python)
+[![Known Vulnerabilities](https://snyk.io/test/github/rajangdavis/osc_python/badge.svg)](https://snyk.io/test/github/rajangdavis/osc_python)
 
 An (under development) Python library for using the [Oracle Service Cloud REST API](https://docs.oracle.com/cloud/latest/servicecs_gs/CXSVC/) influenced by the [ConnectPHP API](http://documentation.custhelp.com/euf/assets/devdocs/november2016/Connect_PHP/Default.htm)
 
