@@ -1,6 +1,6 @@
 env:
   global:
-    - CC_TEST_REPORTER_ID=2d27b534f53b14fedb93e4ca11462c8381df962306561cfd87da66c04b0b00bf
+    - CC_TEST_REPORTER_ID=b5efedd65d6e7a6532eaeb5a6493c84871ce56b9bb0a3bd9e67f06c4384e978c
 language: python
 python:
   - "2.7"
@@ -17,4 +17,4 @@ script:
   - pytest # or py.test for Python versions 3.5 and below
 after_script:
   - coverage run /home/travis/build/rajangdavis/osc_python/osc_python/* && coverage xml
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT -t coverage.py -d
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT -t coverage.py
