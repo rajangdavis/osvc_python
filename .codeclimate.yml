@@ -5,11 +5,12 @@
 # For help setting your languages:
 # http://docs.codeclimate.com/article/169-configuring-analysis-languages
 #
-languages:
-  Ruby: false
-  Javascript: false
-  PHP: false
-  Python: true
+engines:
+  duplication:
+    enabled: true
+    config:
+      languages:
+        python: true
 
 #
 # ---Exclude Files or Directories---
@@ -21,4 +22,3 @@ exclude_paths:
   - build/
   - dist/
   - osc_python.egg-info/
-  - /home/travis/virtualenv/python2.7.13/lib/
