@@ -1,5 +1,3 @@
-import operator
-import json
 from osc_python_connect import OSCPythonConnect
 from osc_python_response import OSCPythonResponse
 
@@ -7,15 +5,21 @@ class OSCPythonQueryResults:
 	def __init__(self,client):
 		self.client = client
 
-	def query(self,query):
+	def query(self,query,set = False):
 		client = self.client
 		opc = OSCPythonConnect(client)
 		query_url = "/queryResults/?query={0}".format(query)
 		results = opc.get(query_url)
 		results_list = self.__results_to_list(results)
-		return OSCPythonResponse(results,query_results=results_list)
+		if set == False:
+			return OSCPythonResponse(results,query_results=results_list)
+		else:
+			return results_list
 
 	# Private Methods
+	# update this method to handle multiple items
+	# instead of the adjustment, I sync things up here
+	# then the code for OSCQueryResultsSet is easier
 	def __results_to_list(self,response):
 		if response.code not in [200,201]:
 			return response

@@ -46,6 +46,8 @@ class OSCPythonConnect:
 
 	
 	# Private Methods
+	# This needs to be updated to throw exceptions
+	# When things aren't correct
 	def __check_client(self,client):
 		if client.username == None:
 			print "username is empty"
