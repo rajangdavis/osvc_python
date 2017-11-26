@@ -16,5 +16,5 @@ before_script:
 script:
   - pytest # or py.test for Python versions 3.5 and below
 after_script:
-  - $ coverage run --source=osc_python -m unittest discover -s osc_python && coverage xml
+  - coverage run --source=osc_python -m unittest discover -s osc_python && coverage xml
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT -t coverage.py
