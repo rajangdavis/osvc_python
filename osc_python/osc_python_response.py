@@ -2,7 +2,8 @@ import json
 
 class OSCPythonResponse:
 	def __init__(self,response,**kwargs):
-		self.status_code = response.status_code
+		self.code = response.status_code
+		self.status_code = response.status_code 
 		if 'query_results' in kwargs:
 			self.body = kwargs['query_results']
 			self.pretty = json.dumps(kwargs['query_results'], indent=4)

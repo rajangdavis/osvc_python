@@ -4,7 +4,7 @@ from osc_python_client import OSCPythonClient
 from osc_python import env
 
 
-class TestOSCPythonConnect(unittest.TestCase):
+class TestOSCPythonQueryResults(unittest.TestCase):
 	
 	def setUp(self):
 		self.rn_client = OSCPythonClient(
@@ -17,7 +17,7 @@ class TestOSCPythonConnect(unittest.TestCase):
 	def test_query(self):
 		q = OSCPythonQueryResults(self.rn_client)
 		self.assertIsInstance(q,OSCPythonQueryResults)
-		response = q.query('DESCRIBE')
-		self.assertEquals(response.status_code,200)
-		self.assertIsInstance(response.body,list)
-		self.assertIsInstance(response.pretty,str)
+		result = q.query('DESCRIBE')
+		self.assertEquals(result.code,200)
+		self.assertIsInstance(result.body,list)
+		self.assertIsInstance(result.pretty,str)

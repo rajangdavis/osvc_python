@@ -17,7 +17,7 @@ class OSCPythonQueryResults:
 
 	# Private Methods
 	def __results_to_list(self,response):
-		if response.status_code not in [200,201]:
+		if response.code not in [200,201]:
 			return response
 		else:
 			final_arr = list()
