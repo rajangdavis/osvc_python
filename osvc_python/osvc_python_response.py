@@ -1,6 +1,6 @@
 import json
 
-class OSCPythonResponse:
+class OSvCPythonResponse:
 	def __init__(self,response,**kwargs):
 		self.code = response.status_code
 		self.status_code = response.status_code 

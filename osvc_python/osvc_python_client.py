@@ -1,4 +1,4 @@
-class OSCPythonClient:
+class OSvCPythonClient:
 	def __init__(self,**kwargs):
 		self.interface = kwargs.get('interface','')
 		self.username = kwargs.get('username','')

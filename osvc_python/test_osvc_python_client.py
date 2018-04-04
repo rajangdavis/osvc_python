@@ -1,12 +1,12 @@
 import unittest
-from osc_python_client import OSCPythonClient
-from osc_python import env
+from osvc_python_client import OSvCPythonClient
+from osvc_python import env
 
 
-class TestOSCPythonClient(unittest.TestCase):
+class TestOSvCPythonClient(unittest.TestCase):
 	
 	def setUp(self):
-		self.rn_client = OSCPythonClient(
+		self.rn_client = OSvCPythonClient(
 			username=env('OSC_ADMIN'),
 			password=env('OSC_PASSWORD'),
 			interface=env('OSC_SITE')

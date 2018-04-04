@@ -21,6 +21,6 @@ engines:
 exclude_paths:
   - "build/"
   - "dist/"
-  - "osc_python.egg-info/"
+  - "osvc_python.egg-info/"
   - "**.pyc"
-  - "osc_python/test*"
+  - "osvc_python/test*"

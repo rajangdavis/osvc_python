@@ -1,8 +1,8 @@
 import json
-from osc_python_query_results import OSCPythonQueryResults
-from osc_python_response import OSCPythonResponse
+from osvc_python_query_results import OSvCPythonQueryResults
+from osvc_python_response import OSvCPythonResponse
 
-class OSCPythonQueryResultsSet:
+class OSvCPythonQueryResultsSet:
 	def __init__(self,client):
 		self.client = client
 
@@ -15,7 +15,7 @@ class OSCPythonQueryResultsSet:
 			query_arr.append(arg['query'])
 
 		query_results_set = {}
-		query_search = OSCPythonQueryResults(client)
+		query_search = OSvCPythonQueryResults(client)
 		final_query_string = "; ".join(query_arr)
 		final_results = query_search.query(final_query_string, True)
 		# print final_results

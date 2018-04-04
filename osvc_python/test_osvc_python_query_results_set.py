@@ -1,13 +1,13 @@
 import unittest
-from osc_python_query_results_set import OSCPythonQueryResultsSet
-from osc_python_client import OSCPythonClient
-from osc_python import env
+from osvc_python_query_results_set import OSvCPythonQueryResultsSet
+from osvc_python_client import OSvCPythonClient
+from osvc_python import env
 
 
-class TestOSCPythonQueryResultsSet(unittest.TestCase):
+class TestOSvCPythonQueryResultsSet(unittest.TestCase):
 	
 	def setUp(self):
-		self.rn_client = OSCPythonClient(
+		self.rn_client = OSvCPythonClient(
 			username=env('OSC_ADMIN'),
 			password=env('OSC_PASSWORD'),
 			interface=env('OSC_SITE')
@@ -43,9 +43,9 @@ class TestOSCPythonQueryResultsSet(unittest.TestCase):
 
 
 	def test_query_set(self):
-		self.assertIsInstance(self.rn_client,OSCPythonClient)
-		mq = OSCPythonQueryResultsSet(self.rn_client)
-		self.assertIsInstance(mq,OSCPythonQueryResultsSet)
+		self.assertIsInstance(self.rn_client,OSvCPythonClient)
+		mq = OSvCPythonQueryResultsSet(self.rn_client)
+		self.assertIsInstance(mq,OSvCPythonQueryResultsSet)
 		queries = [
 			{"key":"incidents", "query":"select * from incidents limit 10"},
 			{"key":"serviceCategories", "query":"describe serviceCategories"}

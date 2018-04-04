@@ -1,9 +1,9 @@
 import requests
 import json
-from osc_python_response import OSCPythonResponse
+from osvc_python_response import OSvCPythonResponse
 from requests.auth import HTTPBasicAuth
 
-class OSCPythonConnect:
+class OSvCPythonConnect:
 
 	def __init__(self,client):
 		self.client = self.__check_client(client)
@@ -14,7 +14,7 @@ class OSCPythonConnect:
 		response = requests.get(get_url,
 					auth=(client.username,client.password),
 					verify=client.ssl_verify)
-		return OSCPythonResponse(response)
+		return OSvCPythonResponse(response)
 
 	def post(self,resource_url,json_data={}):
 		client = self.client
@@ -24,7 +24,7 @@ class OSCPythonConnect:
 					 auth=(client.username,client.password),
 					 data=json_data,
 					 verify=client.ssl_verify)
-		return OSCPythonResponse(response)
+		return OSvCPythonResponse(response)
 
 	def patch(self,resource_url,json_data={}):
 		client = self.client

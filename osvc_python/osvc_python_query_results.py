@@ -1,18 +1,18 @@
-from osc_python_connect import OSCPythonConnect
-from osc_python_response import OSCPythonResponse
+from osvc_python_connect import OSvCPythonConnect
+from osvc_python_response import OSvCPythonResponse
 
-class OSCPythonQueryResults:
+class OSvCPythonQueryResults:
 	def __init__(self,client):
 		self.client = client
 
 	def query(self,query,set = False):
 		client = self.client
-		opc = OSCPythonConnect(client)
+		opc = OSvCPythonConnect(client)
 		query_url = "/queryResults/?query={0}".format(query)
 		results = opc.get(query_url)
 		results_list = self.__results_to_list(results)
 		if set == False:
-			return OSCPythonResponse(results,query_results=results_list)
+			return OSvCPythonResponse(results,query_results=results_list)
 		else:
 			return results_list
 

@@ -1,17 +1,17 @@
-# OSCPython
+# OSvCPython
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/7be0820423b00dade9c8/maintainability)](https://codeclimate.com/github/rajangdavis/osc_python/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/7be0820423b00dade9c8/test_coverage)](https://codeclimate.com/github/rajangdavis/osc_python/test_coverage)
-[![Build Status](https://travis-ci.org/rajangdavis/osc_python.svg?branch=master)](https://travis-ci.org/rajangdavis/osc_python)
-[![PyPI version](https://badge.fury.io/py/osc_python.svg)](https://badge.fury.io/py/osc_python)
-[![Known Vulnerabilities](https://snyk.io/test/github/rajangdavis/osc_python/badge.svg)](https://snyk.io/test/github/rajangdavis/osc_python)
+[![Maintainability](https://api.codeclimate.com/v1/badges/7be0820423b00dade9c8/maintainability)](https://codeclimate.com/github/rajangdavis/osvc_python/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/7be0820423b00dade9c8/test_coverage)](https://codeclimate.com/github/rajangdavis/osvc_python/test_coverage)
+[![Build Status](https://travis-ci.org/rajangdavis/osvc_python.svg?branch=master)](https://travis-ci.org/rajangdavis/osvc_python)
+[![PyPI version](https://badge.fury.io/py/osvc_python.svg)](https://badge.fury.io/py/osvc_python)
+[![Known Vulnerabilities](https://snyk.io/test/github/rajangdavis/osvc_python/badge.svg)](https://snyk.io/test/github/rajangdavis/osvc_python)
 
 An (under development) Python library for using the [Oracle Service Cloud REST API](https://docs.oracle.com/cloud/latest/servicecs_gs/CXSVC/) influenced by the [ConnectPHP API](http://documentation.custhelp.com/euf/assets/devdocs/november2016/Connect_PHP/Default.htm)
 
 ## Todo
 I am looking to implement the following items soon:
-1. OSCPythonQueryResultsSet, an object for performing multiple queries
-2. OSCPythonAnalyticsReportResults, an object for running Analytics Reports
+1. OSvCPythonQueryResultsSet, an object for performing multiple queries
+2. OSvCPythonAnalyticsReportResults, an object for running Analytics Reports
 3. Test suite (in progress)
 4. Documentation
   
@@ -49,12 +49,12 @@ The link covers how to:
 
 Install with pip:
 
-    $ pip install osc_python
+    $ pip install osvc_python
 
 
 ## Client Configuration
 
-An OSCPythonClient class lets the library know which credentials and interface to use for interacting with the Oracle Service Cloud REST API.
+An OSvCPythonClient class lets the library know which credentials and interface to use for interacting with the Oracle Service Cloud REST API.
 This is helpful if you need to interact with multiple interfaces or set different headers for different objects.
 
 ```python
@@ -62,10 +62,10 @@ This is helpful if you need to interact with multiple interfaces or set differen
 # Configuration is as simple as importing the package
 # and entering in credentials
 
-from 'osc_python' import OSCPythonClient
+from 'osvc_python' import OSvCPythonClient
 
 # Configuration Client
-self.rn_client = OSCPythonClient(
+self.rn_client = OSvCPythonClient(
 		username=env('OSC_ADMIN'),
 		password=env('OSC_PASSWORD'),
 		interface=env('OSC_SITE')
@@ -82,20 +82,20 @@ rn_client.is_demo() 				#=> Changes 'custhelp' domain to 'rightnowdemo'
 
 
 
-## OSCPythonQueryResults example
+## OSvCPythonQueryResults example
 
 This is for running one ROQL query. Whatever is allowed by the REST API (limits and sorting) is allowed with this library.
 
-OSCPythonQueryResults only has one function: 'query', which takes an OSCPythonClient object and string query (example below).
+OSvCPythonQueryResults only has one function: 'query', which takes an OSvCPythonClient object and string query (example below).
 
 ```python
-from 'osc_python' import OSCPythonClient,OSCPythonQueryResults
+from 'osvc_python' import OSvCPythonClient,OSvCPythonQueryResults
 
-rn_client = OSCPythonClient(env('OSC_ADMIN'),
+rn_client = OSvCPythonClient(env('OSC_ADMIN'),
 			    env('OSC_PASSWORD'),
     			    env('OSC_SITE'))
 
-q = OSCPythonQueryResults(rn_client)
+q = OSvCPythonQueryResults(rn_client)
 query = "DESCRIBE Answers"
 results = q.query(query)
 
@@ -128,19 +128,19 @@ dti("January 1st") # => 2017-01-01T00:00:00-08:00 # => 12:00 AM, January First o
 
 ### CREATE
 ```python
-#### OSCPythonConnect.post( <client>, <url>, <json_data> )
-#### returns a OSCPythonResponse object
+#### OSvCPythonConnect.post( <client>, <url>, <json_data> )
+#### returns a OSvCPythonResponse object
 
 # Here's how you could create a new ServiceProduct object
 # using Python variables, hashes(sort of like JSON), and arrays to set field information
 
-from osc_python import env,OSCPythonClient, OSCPythonConnect
+from osvc_python import env,OSvCPythonClient, OSvCPythonConnect
 
-rn_client = OSCPythonClient(env('OSC_ADMIN'),
+rn_client = OSvCPythonClient(env('OSC_ADMIN'),
 			    env('OSC_PASSWORD'),
 			    env('OSC_SITE'))
 
-opc = OSCPythonConnect(rn_client)
+opc = OSvCPythonConnect(rn_client)
 
 new_product = {}
 new_product['names'] = []
@@ -168,17 +168,17 @@ print res.content # => JSON body
 
 ### READ
 ```python
-#### OSCPythonConnect.get( <client>, optional (<url>/<id>/...<params>) )
-#### returns a OSCPythonResponse object
+#### OSvCPythonConnect.get( <client>, optional (<url>/<id>/...<params>) )
+#### returns a OSvCPythonResponse object
 # Here's how you could get an instance of ServiceProducts
 
-from osc_python import env,OSCPythonClient, OSCPythonConnect
+from osvc_python import env,OSvCPythonClient, OSvCPythonConnect
 
-rn_client = OSCPythonClient(env('OSC_ADMIN'),
+rn_client = OSvCPythonClient(env('OSC_ADMIN'),
 			    env('OSC_PASSWORD'),
 			    env('OSC_SITE'))
 
-opc = OSCPythonConnect(rn_client)
+opc = OSvCPythonConnect(rn_client)
 res = opc.get('serviceProducts/164')
 
 print res.status_code # => 200
@@ -210,18 +210,18 @@ print res.pretty_content # => Pretty Printed JSON response
 
 ### UPDATE
 ```python
-#### OSCPythonConnect.patch(<url>, <json_data> )
-#### returns a OSCPythonResponse object
+#### OSvCPythonConnect.patch(<url>, <json_data> )
+#### returns a OSvCPythonResponse object
 # Here's how you could update an Answer object
 # using Python variables, lists, and dicts
 # to set field information
-from osc_python import env,OSCPythonClient, OSCPythonConnect
+from osvc_python import env,OSvCPythonClient, OSvCPythonConnect
 
-rn_client = OSCPythonClient(env('OSC_ADMIN'),
+rn_client = OSvCPythonClient(env('OSC_ADMIN'),
 			    env('OSC_PASSWORD'),
 			    env('OSC_SITE'))
 			    
-opc = OSCPythonConnect(rn_client)
+opc = OSvCPythonConnect(rn_client)
 
 # Patch example
 answer_updated_hash = {}
@@ -240,18 +240,18 @@ print updated_answer.content #=> Returns as JSON
 
 ### DELETE
 ```python
-#### OSCPythonConnect.delete(<url> )
-#### returns a OSCPythonResponse object
+#### OSvCPythonConnect.delete(<url> )
+#### returns a OSvCPythonResponse object
 # Here's how you could delete an Answer object
-# and OSCPythonConnect classes
+# and OSvCPythonConnect classes
 
-from osc_python import env,OSCPythonClient, OSCPythonConnect
+from osvc_python import env,OSvCPythonClient, OSvCPythonConnect
 
-rn_client = OSCPythonClient(env('OSC_ADMIN'),
+rn_client = OSvCPythonClient(env('OSC_ADMIN'),
 			    env('OSC_PASSWORD'),
 			    env('OSC_SITE'))
 
-opc = OSCPythonConnect(rn_client)
+opc = OSvCPythonConnect(rn_client)
 deleted_answer = opc.delete('answers/154')
 print deleted_answer.status_code #=> 200
 

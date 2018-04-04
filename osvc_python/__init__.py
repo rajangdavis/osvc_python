@@ -1,9 +1,9 @@
 import os
 from datetime import datetime
 from dateutil import parser
-from osc_python_client import OSCPythonClient
-from osc_python_connect import OSCPythonConnect
-from osc_python_query_results import OSCPythonQueryResults
+from osvc_python_client import OSvCPythonClient
+from osvc_python_connect import OSvCPythonConnect
+from osvc_python_query_results import OSvCPythonQueryResults
 
 def env(var):
 	return os.environ[var]
@@ -27,4 +27,4 @@ def arrf(**kwargs):
 			filter_hash[attrs] = kwargs[attrs]
 	return filter_hash
 
-__all__ = ['env','dti','arrf','OSCPythonConnect','OSCPythonClient','OSCPythonQueryResults']
+__all__ = ['env','dti','arrf','OSvCPythonConnect','OSvCPythonClient','OSvCPythonQueryResults']
