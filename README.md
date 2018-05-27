@@ -5,6 +5,7 @@
 [![Build Status](https://travis-ci.org/rajangdavis/osvc_python.svg?branch=master)](https://travis-ci.org/rajangdavis/osvc_python)
 [![PyPI version](https://badge.fury.io/py/osvc-python.svg)](https://badge.fury.io/py/osvc-python)
 [![Known Vulnerabilities](https://snyk.io/test/github/rajangdavis/osvc_python/badge.svg)](https://snyk.io/test/github/rajangdavis/osvc_python)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Frajangdavis%2Fosvc_python.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Frajangdavis%2Fosvc_python?ref=badge_shield)
 
 An (under development) Python library for using the [Oracle Service Cloud REST API](https://docs.oracle.com/cloud/latest/servicecs_gs/CXSVC/) influenced by the [ConnectPHP API](http://documentation.custhelp.com/euf/assets/devdocs/november2016/Connect_PHP/Default.htm)
 
@@ -256,3 +257,7 @@ deleted_answer = opc.delete('answers/154')
 print deleted_answer.status_code #=> 200
 
 ```
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Frajangdavis%2Fosvc_python.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Frajangdavis%2Fosvc_python?ref=badge_large)
