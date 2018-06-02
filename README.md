@@ -1,7 +1,7 @@
 # OSvCPython
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/7be0820423b00dade9c8/maintainability)](https://codeclimate.com/github/rajangdavis/osvc_python/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/7be0820423b00dade9c8/test_coverage)](https://codeclimate.com/github/rajangdavis/osvc_python/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/8bc7c1d010a26c36a70a/maintainability)](https://codeclimate.com/github/rajangdavis/osvc_python/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/8bc7c1d010a26c36a70a/test_coverage)](https://codeclimate.com/github/rajangdavis/osvc_python/test_coverage)
 [![Build Status](https://travis-ci.org/rajangdavis/osvc_python.svg?branch=master)](https://travis-ci.org/rajangdavis/osvc_python)
 [![PyPI version](https://badge.fury.io/py/osvc-python.svg)](https://badge.fury.io/py/osvc-python)
 [![Known Vulnerabilities](https://snyk.io/test/github/rajangdavis/osvc_python/badge.svg)](https://snyk.io/test/github/rajangdavis/osvc_python)
