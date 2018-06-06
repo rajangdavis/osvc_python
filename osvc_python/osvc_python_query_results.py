@@ -1,5 +1,5 @@
-from osvc_python_connect import OSvCPythonConnect
-from osvc_python_response import OSvCPythonResponse
+from .osvc_python_connect import OSvCPythonConnect
+from .osvc_python_response import OSvCPythonResponse
 
 class OSvCPythonQueryResults:
 	def __init__(self,client):

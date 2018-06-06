@@ -1,7 +1,7 @@
 import unittest
-from osvc_python_query_results import OSvCPythonQueryResults
-from osvc_python_client import OSvCPythonClient
-from osvc_python import env
+from .osvc_python_query_results import OSvCPythonQueryResults
+from .osvc_python_client import OSvCPythonClient
+from . import env
 
 
 class TestOSvCPythonQueryResults(unittest.TestCase):

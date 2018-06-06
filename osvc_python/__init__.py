@@ -1,9 +1,9 @@
 import os
 from datetime import datetime
 from dateutil import parser
-from osvc_python_client import OSvCPythonClient
-from osvc_python_connect import OSvCPythonConnect
-from osvc_python_query_results import OSvCPythonQueryResults
+from .osvc_python_client import OSvCPythonClient
+from .osvc_python_connect import OSvCPythonConnect
+from .osvc_python_query_results import OSvCPythonQueryResults
 
 def env(var):
 	return os.environ[var]

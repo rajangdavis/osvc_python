@@ -1,6 +1,6 @@
 import json
-from osvc_python_query_results import OSvCPythonQueryResults
-from osvc_python_response import OSvCPythonResponse
+from .osvc_python_query_results import OSvCPythonQueryResults
+from .osvc_python_response import OSvCPythonResponse
 
 class OSvCPythonQueryResultsSet:
 	def __init__(self,client):

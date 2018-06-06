@@ -1,6 +1,6 @@
 import requests
 import json
-from osvc_python_response import OSvCPythonResponse
+from .osvc_python_response import OSvCPythonResponse
 from requests.auth import HTTPBasicAuth
 
 class OSvCPythonConnect:
@@ -50,11 +50,11 @@ class OSvCPythonConnect:
 	# When things aren't correct
 	def __check_client(self,client):
 		if client.username == None:
-			print "username is empty"
+			raise Exception("username is empty")
 		elif client.password == None:
-			print "password is empty"
+			raise Exception("password is empty")
 		elif client.interface == None:
-			print "interface is empty"
+			raise Exception("interface is empty")
 		return client
 		
 	def __url_format(self,resource_url=''):
