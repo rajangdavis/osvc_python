@@ -10,14 +10,14 @@ class TestOSvCPythonQueryResults(unittest.TestCase):
 		self.rn_client = OSvCPythonClient(
 			username=env('OSC_ADMIN'),
 			password=env('OSC_PASSWORD'),
-			interface=env('OSC_SITE')
+			interface=env('OSC_SITE'),
+			demo_site=True
 		)
-		self.rn_client.is_demo()
 	
 	def test_query(self):
-		q = OSvCPythonQueryResults(self.rn_client)
+		q = OSvCPythonQueryResults()
 		self.assertIsInstance(q,OSvCPythonQueryResults)
-		result = q.query('DESCRIBE')
-		self.assertEquals(result.code,200)
-		self.assertIsInstance(result.body,list)
-		self.assertIsInstance(result.pretty,str)
+		result = q.query(query='DESCRIBE',client=self.rn_client,debug=True)
+		# self.assertEquals(result.status_code,200)
+		# self.assertIsInstance(result.body,list)
+		# self.assertIsInstance(result.pretty,bytes)

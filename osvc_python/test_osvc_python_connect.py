@@ -10,14 +10,23 @@ class TestOSvCPythonConnect(unittest.TestCase):
 		self.rn_client = OSvCPythonClient(
 			username=env('OSC_ADMIN'),
 			password=env('OSC_PASSWORD'),
-			interface=env('OSC_SITE')
+			interface=env('OSC_SITE'),
+			demo_site=True
 		)
-		self.rn_client.is_demo()
 	
 	def test_get(self):
-		opc = OSvCPythonConnect(self.rn_client)
+		opc = OSvCPythonConnect()
 		self.assertIsInstance(opc,OSvCPythonConnect)
-		response = opc.get('answers')
-		self.assertEquals(response.code,200)
-		self.assertIsInstance(response.body,dict)
-		self.assertIsInstance(response.pretty,str)
+		response = opc.get(client=self.rn_client,url='answers',debug=True)
+		self.assertEqual(response.status_code,200)
+		self.assertIsInstance(response.content,bytes)
+
+# test download of 1 file
+# test download of multiple files
+# test post request
+# test upload of 1 file
+# test upload of multiple files
+# test return error if file doesn't exist
+# test patch request
+# test delete request
+# test options request

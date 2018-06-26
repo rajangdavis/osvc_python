@@ -15,15 +15,27 @@ I am looking to implement the following items soon:
 2. OSvCPythonAnalyticsReportResults, an object for running Analytics Reports
 3. Test suite (in progress)
 4. Documentation
-  
+ 
+## Installing Python (for Windows)
+[Try this link.](https://github.com/BurntSushi/nfldb/wiki/Python-&-pip-Windows-installation)
+The link covers how to:
+1. Install Python
+2. Add Python to your PATH (expose it to the command line)
+3. How to install pip, a Python package manager
+
+## Installation
+
+Install with pip:
+
+    $ pip install osvc-python
 
 ## Compatibility
 
 The library is being tested against Oracle Service Cloud May 2017 using Python 2.7.13.
 
-TravisCI to be set up soon!
-
-All of the HTTP methods should work on any version of Oracle Service Cloud since version May 2015; however, there maybe some issues with querying items on any version before May 2016. This is because ROQL queries were not exposed via the REST API until May 2016.
+All of the HTTP methods should work on any version of Oracle Service Cloud since version May 2015; 
+however, there maybe some issues with querying items on any version before May 2016. 
+This is because ROQL queries were not exposed via the REST API until May 2016.
 
 
 ## Use Cases
@@ -38,20 +50,6 @@ You can use this Python Library for basic scripting and microservices. The main 
 	2. [Read => Get](#read)
 	3. [Update => Patch](#update)
 	4. [Destroy => Delete](#delete)
-
-## Installing Python (for Windows)
-[Try this link.](https://github.com/BurntSushi/nfldb/wiki/Python-&-pip-Windows-installation)
-The link covers how to:
-1. Install Python
-2. Add Python to your PATH (expose it to the command line)
-3. How to install pip, a Python package manager
-
-## Installation
-
-Install with pip:
-
-    $ pip install osvc-python
-
 
 ## Client Configuration
 

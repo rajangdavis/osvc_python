@@ -3,19 +3,38 @@ class OSvCPythonClient:
 		self.interface = kwargs.get('interface','')
 		self.username = kwargs.get('username','')
 		self.password = kwargs.get('password','')
-		self.version = 'v1.3'
-		self.ssl_verify = True
-		self.rule_suppression = False
-		self.demo_site = False
+		self.version = self.set_version(kwargs)
+		self.no_ssl_verify = self.ssl_check(kwargs)
+		self.suppress_rules = self.rule_suppresion(kwargs)
+		self.demo_site = self.is_demo(kwargs)
+		self.access_token = self.access_token_check(kwargs)
 
-	def change_version(self,new_version):
-		self.version = new_version
+	def set_version(self,kwargs):
+		if 'version' in kwargs:
+			return kwargs.get('version')
+		else:
+			return 'v1.3'
 
-	def ssl_off(self):
-		self.ssl_verify = False
+	def ssl_check(self, kwargs):
+		if 'no_ssl_verify' in kwargs and kwargs.get('no_ssl_verify') == True:
+			return True
+		else:
+			return False
 
-	def suppress_rules(self):
-		self.rule_suppression = True
+	def rule_suppresion(self, kwargs):
+		if 'suppress_rules' in kwargs and kwargs.get('suppress_rules') == True:
+			return True
+		else:
+			return False
 
-	def is_demo(self):
-		self.demo_site = True
+	def is_demo(self, kwargs):
+		if 'demo_site' in kwargs and kwargs.get('demo_site') == True:
+			return True
+		else:
+			return False
+
+	def access_token_check(self, kwargs):
+		if 'access_token' in kwargs and len(kwargs.get('access_token')) > 0:
+			return kwargs.get('access_token')
+		else:
+			return ''

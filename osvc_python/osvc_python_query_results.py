@@ -1,34 +1,34 @@
 from .osvc_python_connect import OSvCPythonConnect
-from .osvc_python_response import OSvCPythonResponse
 
 class OSvCPythonQueryResults:
-	def __init__(self,client):
-		self.client = client
+	def __init__(self):
+		pass
 
-	def query(self,query,set = False):
-		client = self.client
-		opc = OSvCPythonConnect(client)
-		query_url = "/queryResults/?query={0}".format(query)
-		results = opc.get(query_url)
-		results_list = self.__results_to_list(results)
-		if set == False:
-			return OSvCPythonResponse(results,query_results=results_list)
+	def query(self,**kwargs):
+		if 'query' in kwargs:
+			query = kwargs.get('query')
 		else:
-			return results_list
+			raise Exception("Query must be defined")
+
+		client = self.__check_client(kwargs)
+		query_url = "/queryResults/?query={0}".format(query)
+		opc = OSvCPythonConnect()
+		results = opc.get(client=client, url=query_url)
+		return self.__results_to_list(results)
 
 	# Private Methods
 	# update this method to handle multiple items
 	# instead of the adjustment, I sync things up here
 	# then the code for OSCQueryResultsSet is easier
 	def __results_to_list(self,response):
-		if response.code not in [200,201]:
-			return response
-		else:
-			final_arr = list()
-			for item in response.body['items']:
-				results_array = self.__iterate_through_rows(item)
-				final_arr.append(results_array)
-			return self.__results_adjustment(final_arr)
+		# if response.status_code not in [200,201]:
+		# 	return response
+		# else:
+		final_arr = list()
+		for item in response['items']:
+			results_array = self.__iterate_through_rows(item)
+			final_arr.append(results_array)
+		return self.__results_adjustment(final_arr)
 	
 	def __results_adjustment(self,final_arr):
 		if len(final_arr) == 1 and type(final_arr[0]).__name__ is 'list':
@@ -44,3 +44,17 @@ class OSvCPythonQueryResults:
 				result_hash[column] = row[column_index] 
 			results_list.append(result_hash)
 		return results_list
+
+	def __check_client(self,kwargs):
+		if 'client' in kwargs:
+			client = kwargs.get('client')
+		else:
+			raise Exception("Client must be defined")
+
+		if client.username == None:
+			raise Exception("username is empty")
+		elif client.password == None:
+			raise Exception("password is empty")
+		elif client.interface == None:
+			raise Exception("interface is empty")
+		return client
