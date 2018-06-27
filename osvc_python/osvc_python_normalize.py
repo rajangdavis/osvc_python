@@ -11,7 +11,7 @@ class OSvCPythonNormalize:
 			return self.__results_adjustment(final_arr)
 	
 	def __results_adjustment(self,final_arr):
-		if len(final_arr) == 1 and type(final_arr[0])._name_ is 'list':
+		if len(final_arr) == 1:
 			return final_arr[0]
 		else:
 			return final_arr
