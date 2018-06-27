@@ -16,15 +16,15 @@ class OSvCPythonClient:
 				"return_if_true" : kwargs.get('version'),
 				"return_if_false" : 'v1.3' 
 			},"no_ssl_verify" : {
-				"conditional" : 'no_ssl_verify' in kwargs and kwargs.get('no_ssl_verify') == True,
+				"conditional" : self.__check_in_kwargs('no_ssl_verify',kwargs),
 				"return_if_true" : True,
 				"return_if_false" : False 
 			},"suppress_rules" : {
-				"conditional" : 'suppress_rules' in kwargs and kwargs.get('suppress_rules') == True,
+				"conditional" : self.__check_in_kwargs('suppress_rules',kwargs),
 				"return_if_true" : True,
 				"return_if_false" : False 
 			},"demo_site" : {
-				"conditional" : 'demo_site' in kwargs and kwargs.get('demo_site') == True,
+				"conditional" : self.__check_in_kwargs('demo_site',kwargs),
 				"return_if_true" : True,
 				"return_if_false" : False 
 			},"access_token" : {
@@ -33,6 +33,9 @@ class OSvCPythonClient:
 				"return_if_false" : '' 
 			}}
 		return self.__set_property(props_to_set[prop])
+
+	def __check_in_kwargs(self,prop,kwargs):
+		return prop in kwargs and kwargs.get(prop) == True
 
 	def __set_property(self,prop_to_set):
 		if prop_to_set["conditional"]:

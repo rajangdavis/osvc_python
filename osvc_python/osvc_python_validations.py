@@ -1,11 +1,5 @@
 class OSvCPythonValidations:
 
-	def check_query(self,kwargs):
-		if 'query' in kwargs:
-			return kwargs.get('query')
-		else:
-			raise Exception("Query must be defined")
-
 	def check_client(self,kwargs):
 		if 'client' in kwargs:
 			return self.__check_client_props(kwargs.get('client'))

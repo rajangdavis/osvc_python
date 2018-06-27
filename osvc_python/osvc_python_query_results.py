@@ -1,12 +1,11 @@
 from .osvc_python_connect import OSvCPythonConnect
-from .osvc_python_validations import OSvCPythonValidations
 
 class OSvCPythonQueryResults:
 	def __init__(self):
 		pass
 
 	def query(self,**kwargs):
-		query = OSvCPythonValidations.check_query(kwargs)
+		query = self.__check_query(kwargs)
 		kwargs['url'] = "/queryResults/?query={0}".format(query)
 		results = OSvCPythonConnect().get(**kwargs)
 
@@ -43,3 +42,9 @@ class OSvCPythonQueryResults:
 				result_hash[column] = row[column_index] 
 			results_list.append(result_hash)
 		return results_list
+
+	def __check_query(self, kwargs):
+		if 'query' in kwargs:
+			return kwargs.get('query')
+		else:
+			raise Exception("Query must be defined")
