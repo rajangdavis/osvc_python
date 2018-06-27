@@ -1,15 +1,22 @@
 class OSvCPythonValidations:
 
+	def check_query(self,kwargs):
+		if 'query' in kwargs:
+			return kwargs.get('query')
+		else:
+			raise Exception("Query must be defined")
+
 	def check_client(self,kwargs):
 		if 'client' in kwargs:
-			client = kwargs.get('client')
+			return self.__check_client_props(kwargs.get('client'))
 		else:
 			raise Exception("Client must be defined")
 
+	def __check_client_props(self, client):
 		if client.username == None:
 			raise Exception("username is empty")
-		elif client.password == None:
+		if client.password == None:
 			raise Exception("password is empty")
-		elif client.interface == None:
+		if client.interface == None:
 			raise Exception("interface is empty")
 		return client

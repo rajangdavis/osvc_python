@@ -62,7 +62,7 @@ class OSvCPythonConnect:
 	def __print_response(self,response,kwargs):
 		if kwargs['verb'] == "get" and "download" in kwargs and kwargs["download"]["stream"] == True:
 			return OSvCPythonFileHandler().download_file(response,kwargs["download"])
-		elif kwargs['verb'] != "options" and kwargs.get("debug") == True:
+		elif kwargs.get("debug") == True:
 			return response
 		elif kwargs['verb'] == "options":
 			return response.headers

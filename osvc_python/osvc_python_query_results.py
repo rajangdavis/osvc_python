@@ -5,11 +5,7 @@ class OSvCPythonQueryResults:
 		pass
 
 	def query(self,**kwargs):
-		if 'query' in kwargs:
-			query = kwargs.get('query')
-		else:
-			raise Exception("Query must be defined")
-
+		query = OSvCPythonValidations.check_query(kwargs)
 		kwargs['url'] = "/queryResults/?query={0}".format(query)
 		results = OSvCPythonConnect().get(**kwargs)
 
