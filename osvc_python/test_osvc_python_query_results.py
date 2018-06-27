@@ -17,7 +17,50 @@ class TestOSvCPythonQueryResults(unittest.TestCase):
 	def test_query(self):
 		q = OSvCPythonQueryResults()
 		self.assertIsInstance(q,OSvCPythonQueryResults)
-		result = q.query(query='DESCRIBE',client=self.rn_client,debug=True)
-		# self.assertEquals(result.status_code,200)
-		# self.assertIsInstance(result.body,list)
-		# self.assertIsInstance(result.pretty,bytes)
+		results = q.query(
+			query='DESCRIBE',
+			client=self.rn_client,
+			debug=True
+		)
+
+		self.assertEqual(results.status_code,200)
+		self.assertIsInstance(results.content,bytes)
+
+		results = q.query(
+			query='DESCRIBE incidents',
+			client=self.rn_client,
+		)
+
+		self.assertEqual(results[0]['Name'],"id")
+
+
+	def test_bad_query(self):
+		
+		results = OSvCPythonQueryResults().query(
+			query='bad query',
+			client=self.rn_client,
+		)
+
+		self.assertEqual(results['status'],400)
+
+
+	def test_no_query(self):
+		
+		def no_query(self):
+			return OSvCPythonQueryResults().query(
+				client=self.rn_client,
+				debug=True
+			)
+
+		self.assertRaises(Exception, no_query)
+
+	def test_bad_query_debug(self):
+
+		results =  OSvCPythonQueryResults().query(
+			client=self.rn_client,
+			query='bad query',
+			debug=True
+		)
+
+		self.assertEqual(results.status_code,400)
+		self.assertIsInstance(results.content,bytes)

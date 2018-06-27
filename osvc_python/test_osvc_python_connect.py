@@ -129,7 +129,7 @@ class TestOSvCPythonConnect(unittest.TestCase):
 			"subject": "FishPhone not working"
 		}
 
-		def returnError(self):
+		def return_error(self):
 			return OSvCPythonConnect().post(
 				client=self.rn_client,
 				url='incidents?expand=all',
@@ -138,7 +138,7 @@ class TestOSvCPythonConnect(unittest.TestCase):
 				files=["./non-existent"]
 			)
 
-		self.assertRaises(Exception, returnError)
+		self.assertRaises(Exception, return_error)
 
 	def test_patch(self):
 		
