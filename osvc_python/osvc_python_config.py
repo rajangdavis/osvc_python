@@ -31,8 +31,7 @@ class OSvCPythonConfig:
 			return annotation
 
 	def __generic_check(self,headers_to_return,kwargs):
-		
-		headers_info = [
+		return self.__set_headers(headers_to_return,[
 			{
 				"property" : "exclude_null",
 				"conditional_check" : kwargs.get("exclude_null") == True,
@@ -56,9 +55,9 @@ class OSvCPythonConfig:
 				"conditional_check" : kwargs.get("utc_time") == True,
 				"header_prop" : "OSvC-CREST-Time-UTC",
 				"header_value" : kwargs.get("utc_time")	
-			}
-		]
+			}], kwargs)
 
+	def __set_headers(self,headers_to_return, headers_info, kwargs):
 		for header_to_check in headers_info:
 			if header_to_check["property"] in kwargs and header_to_check["conditional_check"]:
 				headers_to_return[header_to_check["header_prop"]] = header_to_check["header_value"]
