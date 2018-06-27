@@ -1,4 +1,5 @@
 from .osvc_python_connect import OSvCPythonConnect
+from .osvc_python_validations import OSvCPythonValidations
 
 class OSvCPythonQueryResults:
 	def __init__(self):
