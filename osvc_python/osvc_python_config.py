@@ -18,16 +18,9 @@ class OSvCPythonConfig:
 		if "annotation" in kwargs:
 			annotation = self.__annotation_check(kwargs)
 			headers["OSvC-CREST-Application-Context"] = kwargs.get("annotation")
-		if "exclude_null" in kwargs and kwargs.get("exclude_null") == True:
-			headers["prefer"] = "exclude-null-properties"
-		if "next_request" in kwargs and kwargs.get("next_request") > 0:
-			headers["osvc-crest-next-request-after"] = kwargs.get("next_request")
-		if "schema" in kwargs and kwargs.get("schema") == True:
-			headers["Accept"] = "application/schema+json"
-		if "utc_time" in kwargs and kwargs.get("utc_time") == True:
-			headers["OSvC-CREST-Time-UTC"] = kwargs.get("utc_time")
 		if kwargs.get("client").suppress_rules is True:
 			headers["OSvC-CREST-Suppress-All"] = True
+		headers = self.__generic_check(headers, kwargs)
 		return headers
 
 	def annotation_check(self,kwargs):
@@ -36,3 +29,41 @@ class OSvCPythonConfig:
 			raise Exception("Annotation cannot be greater than 40 characters")
 		else:
 			return annotation
+
+	def __generic_check(self,headers_to_return,kwargs):
+		
+		headers_info = [
+			{
+				"property" : "exclude_null",
+				"conditional_check" : kwargs.get("exclude_null") == True,
+				"header_prop" : "prefer",
+				"header_value" : "exclude-null-properties"
+			},
+			{
+				"property" : "next_request",
+				"conditional_check" : kwargs.get("next_request") != None and kwargs.get("next_request") > 0,
+				"header_prop" : "osvc-crest-next-request-after",
+				"header_value" : kwargs.get("next_request")
+			},
+			{
+				"property" : "schema",
+				"conditional_check" : kwargs.get("schema") == True,
+				"header_prop" : "Accept",
+				"header_value" : "application/schema+json"
+			},
+			{
+				"property" : "utc_time",
+				"conditional_check" : kwargs.get("utc_time") == True,
+				"header_prop" : "OSvC-CREST-Time-UTC",
+				"header_value" : kwargs.get("utc_time")	
+			}
+		]
+
+		for header_to_check in headers_info:
+			if header_to_check["property"] in kwargs and header_to_check["conditional_check"]:
+				headers_to_return[header_to_check["header_prop"]] = header_to_check["header_value"]
+		return headers_to_return
+				
+
+
+
