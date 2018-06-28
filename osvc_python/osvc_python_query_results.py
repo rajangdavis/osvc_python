@@ -1,3 +1,4 @@
+from __future__ import print_function
 from .osvc_python_connect import OSvCPythonConnect
 from .osvc_python_normalize import OSvCPythonNormalize
 
@@ -7,7 +8,7 @@ class OSvCPythonQueryResults:
 
 	def query(self,**kwargs):
 		query = self.__check_query(kwargs)
-		kwargs['url'] = "/queryResults/?query={0}".format(query)
+		kwargs['url'] = "queryResults/?query={0}".format(query)
 		results = OSvCPythonConnect().get(**kwargs)
 
 		if "debug" in kwargs and kwargs.get("debug") == True:
@@ -19,4 +20,5 @@ class OSvCPythonQueryResults:
 		if 'query' in kwargs:
 			return kwargs.get('query')
 		else:
+			print("suh dude")
 			raise Exception("Query must be defined")

@@ -1,5 +1,6 @@
 import requests
 import json
+import sys
 from requests.auth import HTTPBasicAuth
 from .osvc_python_validations import OSvCPythonValidations
 from .osvc_python_file_handling import OSvCPythonFileHandler
@@ -32,7 +33,7 @@ class OSvCPythonConnect:
 
 
 
-	def __build_request_data(self, kwargs):
+	def build_request_data(self, kwargs):
 		client = OSvCPythonValidations().check_client(kwargs)
 		return {
 			"auth" : (client.username,client.password),
@@ -43,7 +44,7 @@ class OSvCPythonConnect:
 
 	def __generic_http_request(self,kwargs):
 		
-		final_request_data = self.__build_request_data(kwargs)
+		final_request_data = self.build_request_data(kwargs)
 
 		download_local = None
 
@@ -54,10 +55,12 @@ class OSvCPythonConnect:
 			kwargs['verb'] = "post"
 			final_request_data["data"] = json.dumps(OSvCPythonFileHandler().upload_check(kwargs))
 
-
-		results = requests.request(kwargs['verb'],**final_request_data)
 		kwargs['download'] = download_local
-		return self.__print_response(results, kwargs)
+		try:
+			return self.__print_response(requests.request(kwargs['verb'],**final_request_data), kwargs)
+		except requests.exceptions.ConnectionError as e:
+			print("\n\033[31mError: Cannot connect to %s \033[0m" % final_request_data["url"])
+			sys.exit()
 	
 	def __print_response(self,response,kwargs):
 		if kwargs['verb'] == "get" and "download" in kwargs and kwargs["download"]["stream"] == True:

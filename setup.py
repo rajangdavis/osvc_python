@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(name='osvc_python',
       version='1.0.0',
-      description='An unofficial Python ORM on top of the Oracle Cloud Services (fka RightNow Technologies) REST API',
+      description='An unofficial Python wrapper on top of the Oracle Cloud Services (fka RightNow Technologies) REST API',
       url='http://github.com/rajangdavis/osvc_python',
       author='Rajan Davis',
       author_email='rajangdavis@gmail.com',

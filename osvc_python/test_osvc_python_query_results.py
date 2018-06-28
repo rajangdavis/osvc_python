@@ -49,7 +49,6 @@ class TestOSvCPythonQueryResults(unittest.TestCase):
 		def no_query(self):
 			return OSvCPythonQueryResults().query(
 				client=self.rn_client,
-				debug=True
 			)
 
 		self.assertRaises(Exception, no_query)

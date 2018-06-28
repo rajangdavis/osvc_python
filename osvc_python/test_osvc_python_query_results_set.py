@@ -31,3 +31,22 @@ class TestOSvCPythonQueryResultsSet(unittest.TestCase):
 
 		self.assertEqual(response.incidents[0]["Name"], "id")
 		self.assertEqual(response.serviceCategories[0]["Name"], "id")
+
+	def test_query_set_parallel(self):
+		
+		mq = OSvCPythonQueryResultsSet()
+		
+		self.assertIsInstance(mq,OSvCPythonQueryResultsSet)
+		
+		response = mq.query_set(
+			queries=[
+				{"key":"incidents", "query":"describe incidents"},
+				{"key":"serviceCategories", "query":"describe serviceCategories"}
+			],
+			client=self.rn_client,
+			parallel=True,
+			debug=True
+		)
+
+		self.assertEqual(response.incidents.status_code, 200)
+		self.assertEqual(response.serviceCategories.status_code, 200)
