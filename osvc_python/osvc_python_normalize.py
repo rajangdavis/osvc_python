@@ -1,6 +1,6 @@
 class OSvCPythonNormalize:
 
-	def normalize_response(self,kwargs):
+	def normalize_response(self,results,kwargs):
 		if "debug" in kwargs and kwargs.get("debug") == True:
 			return results
 		else:

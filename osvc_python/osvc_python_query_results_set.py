@@ -28,7 +28,7 @@ class OSvCPythonQueryResultsSet:
 
 	def __parse_results(self, results, kwargs):
 		query_results_set = QueryResultsSet()
-		parsed_results = OSvCPythonNormalize().normalize_response(results)
+		parsed_results = OSvCPythonNormalize().normalize_response(results,kwargs)
 		for index, parsed_set in enumerate(parsed_results):
 			setattr(query_results_set, kwargs["key_map"][index], parsed_set)
 		return query_results_set

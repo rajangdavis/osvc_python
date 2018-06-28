@@ -9,7 +9,7 @@ class OSvCPythonAnalyticsReportResults:
 		kwargs = self.__check_for_id_and_lookup_name(kwargs)
 		kwargs['url'] = "analyticsReportResults";
 		results = OSvCPythonConnect().post(**kwargs)
-		return OSvCPythonNormalize().normalize_response(results)
+		return OSvCPythonNormalize().normalize_response(results,kwargs)
 
 	def __check_for_id_and_lookup_name(self,kwargs):
 		if not "json" in kwargs:
