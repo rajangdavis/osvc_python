@@ -57,7 +57,7 @@ This is helpful if you need to interact with multiple interfaces or set differen
 ```python
 
 ## Configuration is as simple as requiring the package
-## and passing in an object
+## and passing in an keyword arguments
 
 from osvc_python import *
 
@@ -660,9 +660,9 @@ session_data = requests.get(session_url).json()
 # and you can pass that client to whichever
 # class you need
 response = OSvCPythonConnect().get(
-	client= OSvCPythonClient(
-		session=session_data['session_id'],
-		interface=env('OSC_SITE'),
+	client = OSvCPythonClient(
+		session = session_data['session_id'],
+		interface = env('OSC_SITE'),
 	),
 	url='answers',
 )
