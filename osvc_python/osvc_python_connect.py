@@ -54,7 +54,7 @@ class OSvCPythonConnect:
 			download_local = self.__download_check(kwargs)
 			final_request_data["stream"] = download_local["stream"]
 		elif kwargs['verb'] in ["post","patch"]:
-			kwargs['patched'] = True
+			kwargs['original_verb'] = kwargs['verb']
 			kwargs['verb'] = "post"
 			final_request_data["data"] = json.dumps(OSvCPythonFileHandler().upload_check(kwargs))
 
@@ -72,7 +72,7 @@ class OSvCPythonConnect:
 			return response
 		if kwargs['verb'] == "options":
 			return response.headers
-		if kwargs['verb'] == "delete" or ('patched' in kwargs and kwargs['patched'] == True):
+		if kwargs['verb'] == "delete" or ('original_verb' in kwargs and kwargs['original_verb'] == "patch"):
 			return response.content
 		else:
 			return response.json()

@@ -1,5 +1,6 @@
 import unittest, os
 import requests
+from string import Template
 
 from .osvc_python_connect import OSvCPythonConnect
 from .osvc_python_client import OSvCPythonClient
@@ -15,10 +16,10 @@ class TestOSvCPythonConnect(unittest.TestCase):
 			interface=env('OSC_SITE'),
 			demo_site=True
 		)
-		self.session_url = "https://{0}.rightnowdemo.com/cgi-bin/"
-		"{1}.cfg/php/custom/login_test.php"
-		"?username={2}&password={3}".format(env('OSC_SITE'),env('OSC_CONFIG'),env('OSC_ADMIN'),env('OSC_PASSWORD'))
-	
+		env_var_list = [env('OSC_SITE'),env('OSC_CONFIG'),env('OSC_ADMIN'), env('OSC_PASSWORD')]
+		session_url = "https://{0}.rightnowdemo.com/cgi-bin/{1}.cfg/php/custom/login_test.php?username={2}&password={3}".format(*env_var_list)
+		self.session_url = session_url 
+
 	def test_get(self):
 		
 		opc = OSvCPythonConnect()

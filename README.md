@@ -607,7 +607,7 @@ rn_client = OSvCPythonClient(
 	version="latest"
 )
 
-results = q.query(
+results = OSvCPythonQueryResults().query(
 	query='DELETE FROM incidents LIMIT 1000',
 	client=rn_client,
 	annotation="Bulk Delete Example"
@@ -647,17 +647,11 @@ echo json_encode(AgentAuthenticator::authenticateCredentials($username,$password
 from osvc_python import *
 import requests 
 
-rn_client = OSvCPythonClient(
-	interface=env('OSC_SITE'),
-	username=env('OSC_ADMIN'),
-	password=env('OSC_PASSWORD'),
-)
-
 # Create a url for the location of the custom script from the above
 # Also pass in credentials to authenticate
-session_url = "https://{0}.custhelp.com/cgi-bin/"
-"{1}.cfg/php/custom/login_test.php"
-"?username={2}&password={3}".format(env('OSC_SITE'),env('OSC_CONFIG'),env('OSC_ADMIN'),env('OSC_PASSWORD'))
+env_var_list = [env('OSC_SITE'),env('OSC_CONFIG'),env('OSC_ADMIN'), env('OSC_PASSWORD')]
+
+session_url = "https://{0}.custhelp.com/cgi-bin/{1}.cfg/php/custom/login_test.php?username={2}&password={3}".format(*env_var_list)
 
 # Capture the response data
 session_data = requests.get(session_url).json()
