@@ -15,7 +15,9 @@ class TestOSvCPythonConnect(unittest.TestCase):
 			interface=env('OSC_SITE'),
 			demo_site=True
 		)
-		self.session_url = "https://{0}.rightnowdemo.com/cgi-bin/{1}.cfg/php/custom/login_test.php?username={2}&password={3}".format(env('OSC_SITE'),env('OSC_CONFIG'),env('OSC_ADMIN'),env('OSC_PASSWORD'))
+		self.session_url = "https://{0}.rightnowdemo.com/cgi-bin/"
+		"{1}.cfg/php/custom/login_test.php"
+		"?username={2}&password={3}".format(env('OSC_SITE'),env('OSC_CONFIG'),env('OSC_ADMIN'),env('OSC_PASSWORD'))
 	
 	def test_get(self):
 		

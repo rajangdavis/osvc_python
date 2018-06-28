@@ -56,7 +56,7 @@ class OSvCPythonConfig:
 				"property" : "next_request",
 				"conditional_check" : kwargs.get("next_request") != None and kwargs.get("next_request") > 0,
 				"header_prop" : "osvc-crest-next-request-after",
-				"header_value" : kwargs.get("next_request")
+				"header_value" : str(kwargs.get("next_request"))
 			},
 			{
 				"property" : "schema",
@@ -68,7 +68,7 @@ class OSvCPythonConfig:
 				"property" : "utc_time",
 				"conditional_check" : kwargs.get("utc_time") == True,
 				"header_prop" : "OSvC-CREST-Time-UTC",
-				"header_value" : kwargs.get("utc_time")	
+				"header_value" : "yes"	
 			}], kwargs)
 
 	def __set_headers(self,headers_to_return, headers_info, kwargs):
