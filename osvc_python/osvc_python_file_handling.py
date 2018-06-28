@@ -1,4 +1,6 @@
 import base64
+from .osvc_python_validations import OSvCPythonValidations
+from .osvc_python_examples import FILE_UPLOAD_ERROR
 
 class OSvCPythonFileHandler:
 
@@ -21,7 +23,6 @@ class OSvCPythonFileHandler:
 			return file_data["fileName"]
 
 
-
 	# Upload Logic
 	def __upload_file_check(self,file_to_check):
 		error_issue = False
@@ -32,7 +33,7 @@ class OSvCPythonFileHandler:
 			pass
 		finally:
 			if error_issue == True:
-				raise Exception("Cannot locate file '%s'" % file_to_check)
+				return OSvCPythonValidations().custom_error("Cannot locate file '%s'" % file_to_check, FILE_UPLOAD_ERROR)
 			else:
 				file_data = base64.b64encode(file_to_upload.read())
 				file_to_upload.close()

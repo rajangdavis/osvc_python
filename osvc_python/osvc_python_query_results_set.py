@@ -2,6 +2,8 @@ import requests
 from concurrent.futures import ThreadPoolExecutor, wait, as_completed
 from .osvc_python_connect import OSvCPythonConnect
 from .osvc_python_normalize import OSvCPythonNormalize
+from .osvc_python_validations import OSvCPythonValidations
+from .osvc_python_examples import QUERY_RESULTS_SET_NO_QUERIES
 
 class QueryResultsSet(object):
 		pass
@@ -13,7 +15,8 @@ class OSvCPythonQueryResultsSet:
 	def query_set(self,**kwargs):
 		query_arr = []
 		key_map = []
-		for arg in kwargs["queries"]:
+		queries = self.__check_queries(kwargs)
+		for arg in queries:
 			key_map.append(arg['key'])
 			query_arr.append(arg['query'])
 
@@ -58,3 +61,9 @@ class OSvCPythonQueryResultsSet:
 
 			setattr(query_results_set, kwargs["key_map"][index], parsed_results)
 		return query_results_set
+
+	def __check_queries(self, kwargs):
+		if 'queries' in kwargs and len(kwargs.get('queries')) > 1:
+			return kwargs.get('queries')
+		else:
+			return OSvCPythonValidations().custom_error("QueryResultsSet must have at least 2 queries in a queries properties set within the options object.", QUERY_RESULTS_SET_NO_QUERIES)

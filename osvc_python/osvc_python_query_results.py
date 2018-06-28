@@ -1,5 +1,7 @@
 from .osvc_python_connect import OSvCPythonConnect
 from .osvc_python_normalize import OSvCPythonNormalize
+from .osvc_python_validations import OSvCPythonValidations
+from .osvc_python_examples import QUERY_RESULTS_NO_QUERY
 
 class OSvCPythonQueryResults:
 	def __init__(self):
@@ -15,4 +17,4 @@ class OSvCPythonQueryResults:
 		if 'query' in kwargs:
 			return kwargs.get('query')
 		else:
-			raise Exception("Query must be defined")
+			return OSvCPythonValidations().custom_error("QueryResults must have a query set within the keyword arguments.", QUERY_RESULTS_NO_QUERY)

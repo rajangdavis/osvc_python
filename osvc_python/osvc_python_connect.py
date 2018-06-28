@@ -1,9 +1,10 @@
 import requests
 import json
 from requests.auth import HTTPBasicAuth
-from .osvc_python_validations import OSvCPythonValidations
 from .osvc_python_file_handling import OSvCPythonFileHandler
 from .osvc_python_config import OSvCPythonConfig
+from .osvc_python_validations import OSvCPythonValidations
+from .osvc_python_examples import CLIENT_NOT_DEFINED,CLIENT_NO_INTERFACE_SET_EXAMPLE,CLIENT_NO_USERNAME_SET_EXAMPLE,CLIENT_NO_PASSWORD_SET_EXAMPLE
 
 class OSvCPythonConnect:
 	def __init__(self):
@@ -29,8 +30,6 @@ class OSvCPythonConnect:
 		kwargs['verb'] = "options"
 		return self.__generic_http_request(kwargs)
 
-
-
 	def build_request_data(self, kwargs):
 		client = self.__check_client(kwargs)
 		return {
@@ -39,6 +38,8 @@ class OSvCPythonConnect:
 			"url" : OSvCPythonConfig().url_format(kwargs),
 			"headers": OSvCPythonConfig().headers_check(kwargs)
 		}
+
+
 
 	def __generic_http_request(self,kwargs):
 		
@@ -58,8 +59,8 @@ class OSvCPythonConnect:
 			return self.__print_response(requests.request(kwargs['verb'],**final_request_data), kwargs)
 		except requests.exceptions.ConnectionError as e:
 			print("\n\033[31mError: Cannot connect to %s \033[0m" % final_request_data["url"])
+			print("\n\nYou should check the 'interface' value set in the OSvCPythonClient\nor check your internet connection\n\n")
 			
-	
 	def __print_response(self,response,kwargs):
 		if kwargs['verb'] == "get" and "download" in kwargs and kwargs["download"]["stream"] == True:
 			return OSvCPythonFileHandler().download_file(response,kwargs["download"])
@@ -85,13 +86,13 @@ class OSvCPythonConnect:
 		if 'client' in kwargs:
 			return self.__check_client_props(kwargs.get('client'))
 		else:
-			raise Exception("Client must be defined")
+			return OSvCPythonValidations().custom_error("Client must be defined in keyword arguments",CLIENT_NOT_DEFINED)
 
 	def __check_client_props(self, client):
-		if client.username == None:
-			raise Exception("username is empty")
-		if client.password == None:
-			raise Exception("password is empty")
 		if client.interface == None:
-			raise Exception("interface is empty")
+			return OSvCPythonValidations().custom_error("Client interface cannot be undefined.",CLIENT_NO_INTERFACE_SET_EXAMPLE)
+		if client.username == None and client.password != None:
+			return OSvCPythonValidations().custom_error("Password is set but username is not.",CLIENT_NO_USERNAME_SET_EXAMPLE)
+		if client.password == None and client.username != None:
+			return OSvCPythonValidations().custom_error("Username is set but password is not.",CLIENT_NO_PASSWORD_SET_EXAMPLE)
 		return client

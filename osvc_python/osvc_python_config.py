@@ -1,3 +1,6 @@
+from .osvc_python_validations import OSvCPythonValidations
+from .osvc_python_examples import ANNOTATION_MUST_BE_SHORTER_THAN_40_CHARACTERS
+
 class OSvCPythonConfig:
 
 	def url_format(self,kwargs):
@@ -15,18 +18,22 @@ class OSvCPythonConfig:
 		headers = {}
 		if kwargs["verb"] == "patch":
 			headers["X-HTTP-Method-Override"] = "PATCH"
+		annotation = self.__annotation_check(kwargs)
 		if "annotation" in kwargs:
-			annotation = self.__annotation_check(kwargs)
 			headers["OSvC-CREST-Application-Context"] = kwargs.get("annotation")
 		if kwargs.get("client").suppress_rules is True:
 			headers["OSvC-CREST-Suppress-All"] = True
 		headers = self.__generic_check(headers, kwargs)
 		return headers
 
-	def annotation_check(self,kwargs):
+	def __annotation_check(self,kwargs):
+		client = kwargs.get("client")
 		annotation = kwargs.get("annotation")
-		if len(annotation) > 40:
-			raise Exception("Annotation cannot be greater than 40 characters")
+
+		if annotation is not None and len(annotation) > 40:
+			return OSvCPythonValidations().custom_error("Annotation cannot be greater than 40 characters", ANNOTATION_MUST_BE_SHORTER_THAN_40_CHARACTERS)
+		if (client.version == "v1.4" or client.version == "latest") and annotation is None:
+			return OSvCPythonValidations().custom_error("Annotation must be set when using CCOM version 'v1.4' or newer", ANNOTATION_MUST_BE_SHORTER_THAN_40_CHARACTERS)
 		else:
 			return annotation
 
