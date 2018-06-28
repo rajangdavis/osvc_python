@@ -29,9 +29,9 @@ class OSvCPythonQueryResultsSet:
 	def __parse_results(self, results, kwargs):
 		query_results_set = QueryResultsSet()
 		parsed_results = OSvCPythonNormalize().normalize_response(results)
-			for index, parsed_set in enumerate(parsed_results):
-				setattr(query_results_set, kwargs["key_map"][index], parsed_set)
-			return query_results_set
+		for index, parsed_set in enumerate(parsed_results):
+			setattr(query_results_set, kwargs["key_map"][index], parsed_set)
+		return query_results_set
 
 	# http://elliothallmark.com/2016/12/23/requests-with-concurrent-futures-in-python-2-7/
 	# This is hard because this needs to be compatible with
