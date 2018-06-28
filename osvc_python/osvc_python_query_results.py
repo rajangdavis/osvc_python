@@ -1,4 +1,3 @@
-from __future__ import print_function
 from .osvc_python_connect import OSvCPythonConnect
 from .osvc_python_normalize import OSvCPythonNormalize
 
@@ -20,5 +19,4 @@ class OSvCPythonQueryResults:
 		if 'query' in kwargs:
 			return kwargs.get('query')
 		else:
-			print("suh dude")
 			raise Exception("Query must be defined")

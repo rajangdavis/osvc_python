@@ -62,7 +62,3 @@ class OSvCPythonConfig:
 			if header_to_check["property"] in kwargs and header_to_check["conditional_check"]:
 				headers_to_return[header_to_check["header_prop"]] = header_to_check["header_value"]
 		return headers_to_return
-				
-
-
-

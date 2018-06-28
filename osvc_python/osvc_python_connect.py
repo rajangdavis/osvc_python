@@ -1,13 +1,11 @@
 import requests
 import json
-import sys
 from requests.auth import HTTPBasicAuth
 from .osvc_python_validations import OSvCPythonValidations
 from .osvc_python_file_handling import OSvCPythonFileHandler
 from .osvc_python_config import OSvCPythonConfig
 
 class OSvCPythonConnect:
-
 	def __init__(self):
 		pass
 	
@@ -34,7 +32,7 @@ class OSvCPythonConnect:
 
 
 	def build_request_data(self, kwargs):
-		client = OSvCPythonValidations().check_client(kwargs)
+		client = self.__check_client(kwargs)
 		return {
 			"auth" : (client.username,client.password),
 			"verify" : not client.no_ssl_verify, 
@@ -60,7 +58,7 @@ class OSvCPythonConnect:
 			return self.__print_response(requests.request(kwargs['verb'],**final_request_data), kwargs)
 		except requests.exceptions.ConnectionError as e:
 			print("\n\033[31mError: Cannot connect to %s \033[0m" % final_request_data["url"])
-			sys.exit()
+			
 	
 	def __print_response(self,response,kwargs):
 		if kwargs['verb'] == "get" and "download" in kwargs and kwargs["download"]["stream"] == True:
@@ -82,3 +80,18 @@ class OSvCPythonConnect:
 			return {"file_name" : file_name, "stream" : True}
 		else:
 			return {"file_name" : None,	"stream" : False }
+
+	def __check_client(self,kwargs):
+		if 'client' in kwargs:
+			return self.__check_client_props(kwargs.get('client'))
+		else:
+			raise Exception("Client must be defined")
+
+	def __check_client_props(self, client):
+		if client.username == None:
+			raise Exception("username is empty")
+		if client.password == None:
+			raise Exception("password is empty")
+		if client.interface == None:
+			raise Exception("interface is empty")
+		return client
