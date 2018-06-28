@@ -9,11 +9,7 @@ class OSvCPythonQueryResults:
 		query = self.__check_query(kwargs)
 		kwargs['url'] = "queryResults/?query={0}".format(query)
 		results = OSvCPythonConnect().get(**kwargs)
-
-		if "debug" in kwargs and kwargs.get("debug") == True:
-			return results
-		else:
-			return OSvCPythonNormalize().results_to_list(results)
+		return OSvCPythonNormalize().normalize_response(results)
 	
 	def __check_query(self, kwargs):
 		if 'query' in kwargs:

@@ -28,10 +28,7 @@ class OSvCPythonQueryResultsSet:
 
 	def __parse_results(self, results, kwargs):
 		query_results_set = QueryResultsSet()
-		if "debug" in kwargs and kwargs.get("debug") == True:
-			return results
-		else:
-			parsed_results =  OSvCPythonNormalize().results_to_list(results)
+		parsed_results = OSvCPythonNormalize().normalize_response(results)
 			for index, parsed_set in enumerate(parsed_results):
 				setattr(query_results_set, kwargs["key_map"][index], parsed_set)
 			return query_results_set

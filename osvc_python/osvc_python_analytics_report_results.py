@@ -9,11 +9,7 @@ class OSvCPythonAnalyticsReportResults:
 		kwargs = self.__check_for_id_and_lookup_name(kwargs)
 		kwargs['url'] = "analyticsReportResults";
 		results = OSvCPythonConnect().post(**kwargs)
-
-		if "debug" in kwargs and kwargs.get("debug") == True:
-			return results
-		else:
-			return OSvCPythonNormalize().results_to_list(results)
+		return OSvCPythonNormalize().normalize_response(results)
 
 	def __check_for_id_and_lookup_name(self,kwargs):
 		if not "json" in kwargs:

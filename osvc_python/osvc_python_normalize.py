@@ -1,6 +1,12 @@
 class OSvCPythonNormalize:
+
+	def normalize_response(self,kwargs):
+		if "debug" in kwargs and kwargs.get("debug") == True:
+			return results
+		else:
+			return self.__results_to_list(results)
 		
-	def results_to_list(self,response):
+	def __results_to_list(self,response):
 		if 'status' in response and response['status'] not in [200,201]:
 			return response
 		else:
