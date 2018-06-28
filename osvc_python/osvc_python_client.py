@@ -3,6 +3,8 @@ class OSvCPythonClient:
 		self.interface = kwargs.get('interface','')
 		self.username = kwargs.get('username','')
 		self.password = kwargs.get('password','')
+		self.session = kwargs.get('session','')
+		self.oauth = kwargs.get('oauth','')
 		self.version = self.__generic_setter("version", kwargs)
 		self.no_ssl_verify = self.__generic_setter("no_ssl_verify", kwargs)
 		self.suppress_rules = self.__generic_setter("suppress_rules", kwargs)

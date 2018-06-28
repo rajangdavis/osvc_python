@@ -1,6 +1,5 @@
 import requests
 import json
-from requests.auth import HTTPBasicAuth
 from .osvc_python_file_handling import OSvCPythonFileHandler
 from .osvc_python_config import OSvCPythonConfig
 from .osvc_python_validations import OSvCPythonValidations
@@ -32,12 +31,14 @@ class OSvCPythonConnect:
 
 	def build_request_data(self, kwargs):
 		client = self.__check_client(kwargs)
-		return {
-			"auth" : (client.username,client.password),
+		request_data = {
 			"verify" : not client.no_ssl_verify, 
 			"url" : OSvCPythonConfig().url_format(kwargs),
 			"headers": OSvCPythonConfig().headers_check(kwargs)
 		}
+		if client.username!="":
+			request_data["auth"] = (client.username,client.password)
+		return request_data
 
 
 

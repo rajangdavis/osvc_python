@@ -13,14 +13,6 @@ class OSvCPythonNormalize:
 			results_array = self.__results_adjustment(response)
 			return self.__check_for_items_and_rows(results_array)
 	
-	
-	def __analytics_query_switch(self,response_object):
-		if "items" in response_object:
-			return response_object['items']
-		elif"columnNames" in response_object:
-			return response_object
-
-
 	def __iterate_through_rows(self,item):
 		results_list = list()
 		for row_index, row in enumerate(item['rows']):

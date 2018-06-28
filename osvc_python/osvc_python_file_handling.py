@@ -22,22 +22,16 @@ class OSvCPythonFileHandler:
 		else:
 			return file_data["fileName"]
 
-
 	# Upload Logic
 	def __upload_file_check(self,file_to_check):
 		error_issue = False
 		try:
 			file_to_upload = open(file_to_check, "rb")
+			file_data = base64.b64encode(file_to_upload.read())
+			file_to_upload.close()
+			return file_data
 		except:
-			error_issue = True
-			pass
-		finally:
-			if error_issue == True:
-				return OSvCPythonValidations().custom_error("Cannot locate file '%s'" % file_to_check, FILE_UPLOAD_ERROR)
-			else:
-				file_data = base64.b64encode(file_to_upload.read())
-				file_to_upload.close()
-				return file_data
+			return OSvCPythonValidations().custom_error("Cannot locate file '%s'" % file_to_check, FILE_UPLOAD_ERROR)
 
 	def upload_check(self,kwargs):
 		json_data = self.__json_check(kwargs)

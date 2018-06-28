@@ -1,4 +1,6 @@
 import unittest, os
+import requests
+
 from .osvc_python_connect import OSvCPythonConnect
 from .osvc_python_client import OSvCPythonClient
 from . import env
@@ -13,6 +15,7 @@ class TestOSvCPythonConnect(unittest.TestCase):
 			interface=env('OSC_SITE'),
 			demo_site=True
 		)
+		self.session_url = "https://{0}.rightnowdemo.com/cgi-bin/{1}.cfg/php/custom/login_test.php?username={2}&password={3}".format(env('OSC_SITE'),env('OSC_CONFIG'),env('OSC_ADMIN'),env('OSC_PASSWORD'))
 	
 	def test_get(self):
 		
@@ -22,6 +25,24 @@ class TestOSvCPythonConnect(unittest.TestCase):
 
 		response = opc.get(
 			client=self.rn_client,
+			url='answers',
+			debug=True
+		)
+
+		self.assertEqual(response.status_code,200)
+		self.assertIsInstance(response.content,bytes)
+
+	def test_session_auth(self):
+		session_url = requests.get(self.session_url)
+	
+		rn_client = OSvCPythonClient(
+			session=session_url.json()['session_id'],
+			interface=env('OSC_SITE'),
+			demo_site=True
+		)
+		opc = OSvCPythonConnect()
+		response = opc.get(
+			client=rn_client,
 			url='answers',
 			debug=True
 		)

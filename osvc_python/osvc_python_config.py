@@ -21,18 +21,25 @@ class OSvCPythonConfig:
 		annotation = self.__annotation_check(kwargs)
 		if "annotation" in kwargs:
 			headers["OSvC-CREST-Application-Context"] = kwargs.get("annotation")
+		headers = self.__set_auth(headers,kwargs)		
 		if kwargs.get("client").suppress_rules is True:
 			headers["OSvC-CREST-Suppress-All"] = True
 		headers = self.__generic_check(headers, kwargs)
 		return headers
 
+	def __set_auth(self,headers,kwargs):
+		if kwargs.get("client").session!='':
+			headers["Authorization"] = "Session %s" % kwargs.get("client").session
+		if kwargs.get("client").oauth!='':
+			headers["Authorization"] = "Bearer %s" % kwargs.get("client").oauth
+		return headers
+
 	def __annotation_check(self,kwargs):
 		client = kwargs.get("client")
 		annotation = kwargs.get("annotation")
-
 		if annotation is not None and len(annotation) > 40:
 			return OSvCPythonValidations().custom_error("Annotation cannot be greater than 40 characters", ANNOTATION_MUST_BE_SHORTER_THAN_40_CHARACTERS)
-		if (client.version == "v1.4" or client.version == "latest") and annotation is None:
+		if (client.version in ["v1.4","latest"]) and annotation is None:
 			return OSvCPythonValidations().custom_error("Annotation must be set when using CCOM version 'v1.4' or newer", ANNOTATION_MUST_BE_SHORTER_THAN_40_CHARACTERS)
 		else:
 			return annotation
