@@ -20,7 +20,7 @@ The link covers how to:
 
 Install with pip:
 
-    $ pip install osvc-python
+    $ pip install osvc_python
 
 ## Compatibility
 
@@ -64,7 +64,7 @@ from osvc_python import *
 ## Configuration Client
 rn_client = OSvCPythonClient(
 	
-	## Interace to connect with 
+	## Interface to connect with 
 	interface=env('OSC_SITE'),
 	
 	## Basic Authentication

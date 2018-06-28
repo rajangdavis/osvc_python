@@ -10,6 +10,6 @@ setup(name='osvc_python',
       packages=['osvc_python'],
       install_requires=[
           'requests',
-          'python-dateutil'
+          'futures'
       ],
       zip_safe=False)
