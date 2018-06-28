@@ -17,23 +17,23 @@ class OSvCPythonQueryResultsSet:
 			key_map.append(arg['key'])
 			query_arr.append(arg['query'])
 
+		kwargs["key_map"] = key_map
+		kwargs["query_arr"] = query_arr
 		if "parallel" in kwargs and kwargs.get("parallel") == True:
-			kwargs["key_map"] = key_map
-			kwargs["query_arr"] = query_arr
 			kwargs["verb"] = "get"
 			return self.__parallel_query(kwargs)
 
-		query_results_set = QueryResultsSet()
 		kwargs['url'] = 'queryResults/?query=' + "; ".join(query_arr)
+		return self.__parse_results(OSvCPythonConnect().get(**kwargs), kwargs)
 
-		results = OSvCPythonConnect().get(**kwargs)
-
+	def __parse_results(self, results, kwargs):
+		query_results_set = QueryResultsSet()
 		if "debug" in kwargs and kwargs.get("debug") == True:
 			return results
 		else:
 			parsed_results =  OSvCPythonNormalize().results_to_list(results)
 			for index, parsed_set in enumerate(parsed_results):
-				setattr(query_results_set, key_map[index], parsed_set)
+				setattr(query_results_set, kwargs["key_map"][index], parsed_set)
 			return query_results_set
 
 	# http://elliothallmark.com/2016/12/23/requests-with-concurrent-futures-in-python-2-7/
