@@ -195,7 +195,6 @@ rn_client = OSvCPythonClient(
 
 results = OSvCPythonConnect().get(
 	client=rn_client,
-	json=new_product,
 	url='serviceProducts/168',
 )
 
