@@ -1,4 +1,5 @@
 import base64
+import os
 from .osvc_python_validations import OSvCPythonValidations
 from .osvc_python_examples import FILE_UPLOAD_ERROR
 
@@ -40,7 +41,7 @@ class OSvCPythonFileHandler:
 			json_data["fileAttachments"] = []
 			for file in files_to_upload:
 				encoded_string = self.__upload_file_check(file)
-				clean_file_name = file.replace("./","")
+				clean_file_name = os.path.basename(file)
 				json_data["fileAttachments"].append({
 					"fileName" : clean_file_name, 
 					# https://stackoverflow.com/a/36212932/2548452
