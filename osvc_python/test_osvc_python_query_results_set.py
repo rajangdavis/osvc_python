@@ -32,7 +32,7 @@ class TestOSvCPythonQueryResultsSet(unittest.TestCase):
 		self.assertEqual(response.incidents[0]["Name"], "id")
 		self.assertEqual(response.serviceCategories[0]["Name"], "id")
 
-	def test_query_set_parallel(self):
+	def test_query_set_concurrent(self):
 		
 		mq = OSvCPythonQueryResultsSet()
 		
@@ -44,9 +44,34 @@ class TestOSvCPythonQueryResultsSet(unittest.TestCase):
 				{"key":"serviceCategories", "query":"describe serviceCategories"}
 			],
 			client=self.rn_client,
-			parallel=True,
+			concurrent=True,
 			debug=True
 		)
 
 		self.assertEqual(response.incidents.status_code, 200)
 		self.assertEqual(response.serviceCategories.status_code, 200)
+
+	# def test_query_set_accumulate(self):
+		
+	# 	mq = OSvCPythonQueryResultsSet()
+		
+	# 	response = mq.query_set(
+	# 		queries=[
+	# 			{"key":"incidents", "query":"select id from incidents limit 10"},
+	# 			{"key":"incidents", "query":"select id from incidents limit 10 offset 10"}
+	# 		],
+	# 		client=self.rn_client,
+	# 		concurrent=True,
+	# 	)
+
+	# 	self.assertEqual(len(response.incidents),20)
+
+	# 	non_concurrent_response = mq.query_set(
+	# 		queries=[
+	# 			{"key":"incidents", "query":"select id from incidents limit 10"},
+	# 			{"key":"incidents", "query":"select id from incidents limit 10 offset 10"}
+	# 		],
+	# 		client=self.rn_client,
+	# 	)
+
+	# 	self.assertEqual(len(non_concurrent_response.incidents),20)

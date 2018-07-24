@@ -21,10 +21,18 @@ class OSvCPythonConfig:
 		annotation = self.__annotation_check(kwargs)
 		if "annotation" in kwargs:
 			headers["OSvC-CREST-Application-Context"] = kwargs.get("annotation")
-		headers = self.__set_auth(headers,kwargs)		
-		if kwargs.get("client").suppress_rules is True:
-			headers["OSvC-CREST-Suppress-All"] = True
+		headers = self.__set_auth(headers,kwargs)
+		headers = self.__set_suppression_headers(headers,kwargs)
 		headers = self.__generic_check(headers, kwargs)
+		return headers
+
+	def __set_suppression_headers(self,headers,kwargs):
+		if kwargs.get("client").suppress_rules is True:
+			headers["OSvC-CREST-Suppress-Rules"] = True
+		if kwargs.get("client").suppress_events is True:
+			headers["OSvC-CREST-Suppress-ExternalEvents"] = True
+		if kwargs.get("client").suppress_all is True:
+			headers["OSvC-CREST-Suppress-All"] = True
 		return headers
 
 	def __set_auth(self,headers,kwargs):

@@ -22,9 +22,9 @@ class OSvCPythonQueryResultsSet:
 
 		kwargs["key_map"] = key_map
 		kwargs["query_arr"] = query_arr
-		if "parallel" in kwargs and kwargs.get("parallel") == True:
+		if "concurrent" in kwargs and kwargs.get("concurrent") == True:
 			kwargs["verb"] = "get"
-			return self.__parallel_query(kwargs)
+			return self.__concurrent_query(kwargs)
 
 		kwargs['url'] = 'queryResults/?query=' + "; ".join(query_arr)
 		return self.__parse_results(OSvCPythonConnect().get(**kwargs), kwargs)
@@ -39,7 +39,7 @@ class OSvCPythonQueryResultsSet:
 	# http://elliothallmark.com/2016/12/23/requests-with-concurrent-futures-in-python-2-7/
 	# This is hard because this needs to be compatible with
 	# Python 2.7 AND 3.6.*
-	def __parallel_query(self, kwargs):
+	def __concurrent_query(self, kwargs):
 		query_results_set = QueryResultsSet()
 		pool = ThreadPoolExecutor(len(kwargs["query_arr"]))
 		request_array = []
@@ -57,7 +57,7 @@ class OSvCPythonQueryResultsSet:
 			if "debug" in kwargs and kwargs['debug'] == True:
 				parsed_results = response
 			else:
-				parsed_results = OSvCPythonNormalize().results_to_list(response.json())
+				parsed_results = OSvCPythonNormalize().normalize_response(response.json(),kwargs)
 
 			setattr(query_results_set, kwargs["key_map"][index], parsed_results)
 		return query_results_set

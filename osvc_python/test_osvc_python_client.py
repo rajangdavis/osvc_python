@@ -25,6 +25,8 @@ class TestOSvCPythonClient(unittest.TestCase):
 			interface=env('OSC_SITE'),
 			no_ssl_verify=True,
 			suppress_rules=True,
+			suppress_events=True,
+			suppress_all=True,
 			demo_site=True,
 			access_token="suh dude"
 		)
@@ -36,6 +38,8 @@ class TestOSvCPythonClient(unittest.TestCase):
 		self.assertEqual('v1.3',self.rn_client.version)
 		self.assertFalse(self.rn_client.no_ssl_verify)
 		self.assertFalse(self.rn_client.suppress_rules)
+		self.assertFalse(self.rn_client.suppress_events)
+		self.assertFalse(self.rn_client.suppress_all)
 		self.assertFalse(self.rn_client.demo_site)
 
 	def test_new_version(self):

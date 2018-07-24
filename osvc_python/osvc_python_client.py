@@ -8,6 +8,8 @@ class OSvCPythonClient:
 		self.version = self.__generic_setter("version", kwargs)
 		self.no_ssl_verify = self.__generic_setter("no_ssl_verify", kwargs)
 		self.suppress_rules = self.__generic_setter("suppress_rules", kwargs)
+		self.suppress_events = self.__generic_setter("suppress_events", kwargs)
+		self.suppress_all = self.__generic_setter("suppress_all", kwargs)
 		self.demo_site = self.__generic_setter("demo_site", kwargs)
 		self.access_token = self.__generic_setter("access_token", kwargs)
 
@@ -23,6 +25,14 @@ class OSvCPythonClient:
 				"return_if_false" : False 
 			},"suppress_rules" : {
 				"conditional" : self.__check_in_kwargs('suppress_rules',kwargs),
+				"return_if_true" : True,
+				"return_if_false" : False 
+			},"suppress_events" : {
+				"conditional" : self.__check_in_kwargs('suppress_events',kwargs),
+				"return_if_true" : True,
+				"return_if_false" : False 
+			},"suppress_all" : {
+				"conditional" : self.__check_in_kwargs('suppress_all',kwargs),
 				"return_if_true" : True,
 				"return_if_false" : False 
 			},"demo_site" : {

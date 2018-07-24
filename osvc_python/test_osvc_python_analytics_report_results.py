@@ -31,7 +31,7 @@ class TestOSvCPythonAnalyticsReportResults(unittest.TestCase):
 		response = OSvCPythonAnalyticsReportResults().run(
 			client = self.rn_client,
 			json = {
-				"lookupName": "Incident Activity",
+				"lookupName": "Answer Search",
 				"limit":2,
 			}
 		)
