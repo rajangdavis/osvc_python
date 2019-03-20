@@ -8,10 +8,9 @@ class TestOSvCPythonQueryResultsSet(unittest.TestCase):
 	
 	def setUp(self):
 		self.rn_client = OSvCPythonClient(
-			username=env('OSC_ADMIN'),
-			password=env('OSC_PASSWORD'),
-			interface=env('OSC_SITE'),
-			demo_site=True
+			username=env('OSVC_ADMIN'),
+			password=env('OSVC_PASSWORD'),
+			interface=env('OSVC_SITE'),
 		)
 
 

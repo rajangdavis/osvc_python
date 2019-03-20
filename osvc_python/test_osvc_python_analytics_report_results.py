@@ -7,22 +7,17 @@ class TestOSvCPythonAnalyticsReportResults(unittest.TestCase):
 	
 	def setUp(self):
 		self.rn_client = OSvCPythonClient(
-			username=env('OSC_ADMIN'),
-			password=env('OSC_PASSWORD'),
-			interface=env('OSC_SITE'),
-			demo_site=True
+			username=env('OSVC_ADMIN'),
+			password=env('OSVC_PASSWORD'),
+			interface=env('OSVC_SITE')
 		)
 
 	def testShouldTakeJsonKwargAndDoAPostRequest(self):
 		response = OSvCPythonAnalyticsReportResults().run(
 			client = self.rn_client,
 			json = {
-				"id": 176,
-				"limit":2,
-				"filters":{
-					"name":"search_ex",
-					"values":["returns"]
-				}
+				"limit": 2,
+	        	"id": 185
 			}
 		)
 		self.assertEqual(len(response), 2)

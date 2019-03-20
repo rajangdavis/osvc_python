@@ -6,19 +6,16 @@ from .osvc_python_connect import OSvCPythonConnect
 from .osvc_python_client import OSvCPythonClient
 from . import env
 
-
 class TestOSvCPythonConnect(unittest.TestCase):
 	
 	def setUp(self):
 		self.rn_client = OSvCPythonClient(
-			username=env('OSC_ADMIN'),
-			password=env('OSC_PASSWORD'),
-			interface=env('OSC_SITE'),
-			demo_site=True
+			username=env('OSVC_ADMIN'),
+			password=env('OSVC_PASSWORD'),
+			interface=env('OSVC_SITE'),
 		)
-		env_var_list = [env('OSC_SITE'),env('OSC_CONFIG'),env('OSC_ADMIN'), env('OSC_PASSWORD')]
-		session_url = "https://{0}.rightnowdemo.com/cgi-bin/{1}.cfg/php/custom/login_test.php?username={2}&password={3}".format(*env_var_list)
-		self.session_url = session_url 
+		env_var_list = [env('OSVC_SITE'),env('OSVC_CONFIG'),env('OSVC_ADMIN'), env('OSVC_PASSWORD')]
+		self.session_url = "https://{0}.custhelp.com/cgi-bin/{1}.cfg/php/custom/login_test.php?username={2}&password={3}".format(*env_var_list)
 
 	def test_get(self):
 		
@@ -35,89 +32,48 @@ class TestOSvCPythonConnect(unittest.TestCase):
 		self.assertEqual(response.status_code,200)
 		self.assertIsInstance(response.content,bytes)
 
-	def test_session_auth(self):
-		session_url = requests.get(self.session_url)
-	
-		rn_client = OSvCPythonClient(
-			session=session_url.json()['session_id'],
-			interface=env('OSC_SITE'),
-			demo_site=True
-		)
-		opc = OSvCPythonConnect()
-		response = opc.get(
-			client=rn_client,
-			url='answers',
-			debug=True
-		)
-
-		self.assertEqual(response.status_code,200)
-		self.assertIsInstance(response.content,bytes)
-
-	def test_download_single_file(self):
-		
-		response = OSvCPythonConnect().get(
-			client=self.rn_client,
-			url='incidents/24898/fileAttachments/245?download',
-		)
-
-		assert response == "Downloaded haQE7EIDQVUyzoLDha2SRVsP415IYK8_ocmxgMfyZaw.png"
-		assert os.path.exists("./haQE7EIDQVUyzoLDha2SRVsP415IYK8_ocmxgMfyZaw.png") == 1
-		os.remove("./haQE7EIDQVUyzoLDha2SRVsP415IYK8_ocmxgMfyZaw.png")
-		assert os.path.exists("./haQE7EIDQVUyzoLDha2SRVsP415IYK8_ocmxgMfyZaw.png") == 0
-
-
-	def test_download_multiple_files(self):
-		
-		response = OSvCPythonConnect().get(
-			client=self.rn_client,
-			url='incidents/24898/fileAttachments?download',
-		)
-
-		assert response == "Downloaded downloadedAttachment.tgz"
-		assert os.path.exists("./downloadedAttachment.tgz") == 1
-		os.remove("./downloadedAttachment.tgz")
-		assert os.path.exists("./downloadedAttachment.tgz") == 0
-
 
 	def test_post(self):
 		
 		data = {
 			"primaryContact": {
-				"id": 2
+				"id": 8
 			},
 			"subject": "FishPhone not working"
 		}
 
 		response = OSvCPythonConnect().post(
 			client=self.rn_client,
-			url='incidents?expand=all',
+			url='incidents',
 			json=data,
 			debug=True
 		)
-
-		self.assertEqual(response.status_code,201)
-		self.assertIsInstance(response.content,bytes)
 
 	def test_upload_one_file(self):
 		
 		data = {
 			"primaryContact": {
-				"id": 2
+				"id": 8
 			},
 			"subject": "FishPhone not working"
 		}
 
 		response = OSvCPythonConnect().post(
 			client=self.rn_client,
-			url='incidents?expand=all',
+			url='incidents',
 			json=data,
 			debug=True,
 			files=["./setup.py"]
 		)
 
 		json_response = response.json()
+		
+		response_get = OSvCPythonConnect().get(
+			client=self.rn_client,
+			url='incidents/{}?expand=all'.format(json_response["id"]),
+		)
 
-		self.assertEqual(len(json_response['fileAttachments']['items']),1)
+		self.assertEqual(len(response_get['fileAttachments']['items']),1)
 		self.assertEqual(response.status_code,201)
 		self.assertIsInstance(response.content,bytes)
 
@@ -125,22 +81,27 @@ class TestOSvCPythonConnect(unittest.TestCase):
 		
 		data = {
 			"primaryContact": {
-				"id": 2
+				"id": 8
 			},
 			"subject": "FishPhone not working"
 		}
 
 		response = OSvCPythonConnect().post(
 			client=self.rn_client,
-			url='incidents?expand=all',
+			url='incidents',
 			json=data,
 			debug=True,
 			files=["./setup.py","./LICENSE.txt"]
 		)
 
 		json_response = response.json()
+		
+		response_get = OSvCPythonConnect().get(
+			client=self.rn_client,
+			url='incidents/{}?expand=all'.format(json_response["id"]),
+		)
 
-		self.assertEqual(len(json_response['fileAttachments']['items']),2)
+		self.assertEqual(len(response_get['fileAttachments']['items']),2)
 		self.assertEqual(response.status_code,201)
 		self.assertIsInstance(response.content,bytes)
 
@@ -148,7 +109,7 @@ class TestOSvCPythonConnect(unittest.TestCase):
 		
 		data = {
 			"primaryContact": {
-				"id": 2
+				"id": 8
 			},
 			"subject": "FishPhone not working"
 		}
@@ -164,24 +125,116 @@ class TestOSvCPythonConnect(unittest.TestCase):
 
 		self.assertRaises(Exception, return_error)
 
-	def test_patch(self):
-		
-		data = {
-			"primaryContact": {
-				"id": 2
-			},
-			"subject": "FishPhone not working UPDATED"
-		}
-
-		response = OSvCPythonConnect().patch(
-			client=self.rn_client,
-			url='incidents/26277',
-			json=data,
+	def test_session_auth(self):
+		session_url = requests.get(self.session_url)
+	
+		rn_client = OSvCPythonClient(
+			session=session_url.json()['session_id'],
+			interface=env('OSVC_SITE'),
+		)
+		opc = OSvCPythonConnect()
+		response = opc.get(
+			client=rn_client,
+			url='answers',
 			debug=True
 		)
 
 		self.assertEqual(response.status_code,200)
 		self.assertIsInstance(response.content,bytes)
+
+	def test_download_single_file(self):
+
+		data = {
+			"primaryContact": {
+				"id": 8
+			},
+			"subject": "FishPhone not working"
+		}
+
+		response = OSvCPythonConnect().post(
+			client=self.rn_client,
+			url='incidents',
+			json=data,
+			files=["./MKN7QV9.jpg"]
+		)
+		os.rename("./MKN7QV9.jpg", "./MKN7QV9_renamed.jpg")
+
+		file_attach_url_get = OSvCPythonConnect().get(
+			client=self.rn_client,
+			url='incidents/{}/fileAttachments'.format(response["id"]),
+		)
+
+		file_attach_url = file_attach_url_get['items'][0]['href'].split("v1.3")[1]
+
+		download_attachment = OSvCPythonConnect().get(
+			client=self.rn_client,
+			url='{}?download'.format(file_attach_url),
+		)
+
+		assert download_attachment == "Downloaded MKN7QV9.jpg"
+		assert os.path.exists("./MKN7QV9.jpg") == 1
+		os.remove("./MKN7QV9_renamed.jpg")
+		assert os.path.exists("./MKN7QV9_renamed.jpg") == 0
+
+
+	def test_download_multiple_files(self):
+		
+		data = {
+			"primaryContact": {
+				"id": 8
+			},
+			"subject": "FishPhone not working"
+		}
+
+		response = OSvCPythonConnect().post(
+			client=self.rn_client,
+			url='incidents',
+			json=data,
+			files=["./MKN7QV9.jpg"]
+		)
+
+		download_files = OSvCPythonConnect().get(
+			client=self.rn_client,
+			url='incidents/{}/fileAttachments?download'.format(response["id"]),
+		)
+
+		assert download_files == "Downloaded downloadedAttachment.tgz"
+		assert os.path.exists("./downloadedAttachment.tgz") == 1
+		os.remove("./downloadedAttachment.tgz")
+		assert os.path.exists("./downloadedAttachment.tgz") == 0
+
+	def test_patch(self):
+
+		data = {
+			"primaryContact": {
+				"id": 8
+			},
+			"subject": "FishPhone not working"
+		}
+
+		response = OSvCPythonConnect().post(
+			client=self.rn_client,
+			url='incidents',
+			json=data,
+			debug=True
+		)
+		
+		data_updated = {
+			"primaryContact": {
+				"id": 8
+			},
+			"subject": "FishPhone not working UPDATED"
+		}
+
+		response_updated = OSvCPythonConnect().patch(
+			client=self.rn_client,
+			url='incidents/{}'.format(response.json()["id"]),
+			json=data_updated,
+			debug=True
+		)
+
+		self.assertEqual(response_updated.status_code,200)
+		self.assertIsInstance(response_updated.content,bytes)
 
 	def test_delete(self):
 		response = OSvCPythonConnect().delete(
