@@ -65,11 +65,11 @@ from osvc_python import *
 rn_client = OSvCPythonClient(
 	
 	## Interface to connect with 
-	interface=env('OSC_SITE'),
+	interface=env('OSVC_SITE'),
 	
 	## Basic Authentication
-	username=env('OSC_ADMIN'),
-	password=env('OSC_PASSWORD'),
+	username=env('OSVC_ADMIN'),
+	password=env('OSVC_PASSWORD'),
 	
 	## Session Authentication
 	# session=<session_token>,
@@ -97,10 +97,9 @@ from osvc_python import *
 
 ## Configuration Client
 rn_client = OSvCPythonClient(
-	interface=env('OSC_SITE'),
-	username=env('OSC_ADMIN'),
-	password=env('OSC_PASSWORD'),
-	demo_site=True
+	interface=env('OSVC_SITE'),
+	username=env('OSVC_ADMIN'),
+	password=env('OSVC_PASSWORD')
 )
 
 print(OSvCPythonConnect().get(
@@ -145,9 +144,9 @@ from osvc_python import *
 
 ## Create an OSvCPythonClient object
 rn_client = OSvCPythonClient(
-	interface=env('OSC_SITE'),
-	username=env('OSC_ADMIN'),
-	password=env('OSC_PASSWORD'),
+	interface=env('OSVC_SITE'),
+	username=env('OSVC_ADMIN'),
+	password=env('OSVC_PASSWORD'),
 )
 
 ## JSON object
@@ -188,9 +187,9 @@ results = OSvCPythonConnect().post(
 from osvc_python import *
 
 rn_client = OSvCPythonClient(
-	interface=env('OSC_SITE'),
-	username=env('OSC_ADMIN'),
-	password=env('OSC_PASSWORD'),
+	interface=env('OSVC_SITE'),
+	username=env('OSVC_ADMIN'),
+	password=env('OSVC_PASSWORD'),
 )
 
 results = OSvCPythonConnect().get(
@@ -212,9 +211,9 @@ from osvc_python import *
 
 ## Create an OSvCPythonClient object
 rn_client = OSvCPythonClient(
-	interface=env('OSC_SITE'),
-	username=env('OSC_ADMIN'),
-	password=env('OSC_PASSWORD'),
+	interface=env('OSVC_SITE'),
+	username=env('OSVC_ADMIN'),
+	password=env('OSVC_PASSWORD'),
 )
 
 ## JSON object
@@ -250,9 +249,9 @@ from osvc_python import *
 
 ## Create an OSvCPythonClient object
 rn_client = OSvCPythonClient(
-	interface=env('OSC_SITE'),
-	username=env('OSC_ADMIN'),
-	password=env('OSC_PASSWORD'),
+	interface=env('OSVC_SITE'),
+	username=env('OSVC_ADMIN'),
+	password=env('OSVC_PASSWORD'),
 )
 
 results = OSvCPythonConnect().delete(
@@ -271,9 +270,9 @@ from osvc_python import *
 
 ## Create an OSvCPythonClient object
 rn_client = OSvCPythonClient(
-	interface=env('OSC_SITE'),
-	username=env('OSC_ADMIN'),
-	password=env('OSC_PASSWORD'),
+	interface=env('OSVC_SITE'),
+	username=env('OSVC_ADMIN'),
+	password=env('OSVC_PASSWORD'),
 )
 
 results = OSvCPythonConnect().options(
@@ -291,9 +290,9 @@ from osvc_python import *
 
 ## Create an OSvCPythonClient object
 rn_client = OSvCPythonClient(
-	interface=env('OSC_SITE'),
-	username=env('OSC_ADMIN'),
-	password=env('OSC_PASSWORD'),
+	interface=env('OSVC_SITE'),
+	username=env('OSVC_ADMIN'),
+	password=env('OSVC_PASSWORD'),
 )
 
 post_upload_data = {
@@ -333,9 +332,9 @@ from osvc_python import *
 
 response = OSvCPythonConnect().get(
 	client= OSvCPythonClient(
-		interface=env('OSC_SITE'),
-		username=env('OSC_ADMIN'),
-		password=env('OSC_PASSWORD'),
+		interface=env('OSVC_SITE'),
+		username=env('OSVC_ADMIN'),
+		password=env('OSVC_PASSWORD'),
 	),
 	url='incidents/24898/fileAttachments/245?download',
 )
@@ -351,9 +350,9 @@ from osvc_python import *
 
 response = OSvCPythonConnect().get(
 	client= OSvCPythonClient(
-		interface=env('OSC_SITE'),
-		username=env('OSC_ADMIN'),
-		password=env('OSC_PASSWORD'),
+		interface=env('OSVC_SITE'),
+		username=env('OSVC_ADMIN'),
+		password=env('OSVC_PASSWORD'),
 	),
 	url='incidents/24898/fileAttachments?download',
 )
@@ -374,9 +373,9 @@ OSvCPythonQueryResults only has one function: 'query', which takes an OSvCPython
 from osvc_python import *
 
 rn_client = OSvCPythonClient(
-	username=env('OSC_ADMIN'),
-	password=env('OSC_PASSWORD'),
-	interface=env('OSC_SITE'),
+	username=env('OSVC_ADMIN'),
+	password=env('OSVC_PASSWORD'),
+	interface=env('OSVC_SITE'),
 )
 
 results = OSvCPythonQueryResults().query(
@@ -400,9 +399,9 @@ OSvCPythonQueryResultsSet only has one function: 'query_set', which takes an OSv
 from osvc_python import *
 
 rn_client = OSvCPythonClient(
-	username=env('OSC_ADMIN'),
-	password=env('OSC_PASSWORD'),
-	interface=env('OSC_SITE'),
+	username=env('OSVC_ADMIN'),
+	password=env('OSVC_PASSWORD'),
+	interface=env('OSVC_SITE'),
 )
 
 
@@ -568,10 +567,9 @@ Pass in the 'id', 'lookupName', and 'filters' in the options data object to set 
 from osvc_python import *
 
 rn_client = OSvCPythonClient(
-	interface=env('OSC_SITE'),
-	username=env('OSC_ADMIN'),
-	password=env('OSC_PASSWORD'),
-	demo_site=True
+	interface=env('OSVC_SITE'),
+	username=env('OSVC_ADMIN'),
+	password=env('OSVC_PASSWORD')
 )
 
 response = OSvCPythonAnalyticsReportResults().run(
@@ -600,9 +598,9 @@ Here is an example of the how to use the Bulk Delete feature:
 from osvc_python import *
 
 rn_client = OSvCPythonClient(
-	interface=env('OSC_SITE'),
-	username=env('OSC_ADMIN'),
-	password=env('OSC_PASSWORD'),
+	interface=env('OSVC_SITE'),
+	username=env('OSVC_ADMIN'),
+	password=env('OSVC_PASSWORD'),
 	version="latest"
 )
 
@@ -648,7 +646,7 @@ import requests
 
 # Create a url for the location of the custom script from the above
 # Also pass in credentials to authenticate
-env_var_list = [env('OSC_SITE'),env('OSC_CONFIG'),env('OSC_ADMIN'), env('OSC_PASSWORD')]
+env_var_list = [env('OSVC_SITE'),env('OSVC_CONFIG'),env('OSVC_ADMIN'), env('OSVC_PASSWORD')]
 
 session_url = "https://{0}.custhelp.com/cgi-bin/{1}.cfg/php/custom/login_test.php?username={2}&password={3}".format(*env_var_list)
 
@@ -661,7 +659,7 @@ session_data = requests.get(session_url).json()
 response = OSvCPythonConnect().get(
 	client = OSvCPythonClient(
 		session = session_data['session_id'],
-		interface = env('OSC_SITE'),
+		interface = env('OSVC_SITE'),
 	),
 	url='answers',
 )
@@ -673,9 +671,9 @@ Instead of running multiple queries in with 1 GET request, you can run multiple 
 from osvc_python import *
 
 rn_client = OSvCPythonClient(
-	username=env('OSC_ADMIN'),
-	password=env('OSC_PASSWORD'),
-	interface=env('OSC_SITE'),
+	username=env('OSVC_ADMIN'),
+	password=env('OSVC_PASSWORD'),
+	interface=env('OSVC_SITE'),
 )
 
 
