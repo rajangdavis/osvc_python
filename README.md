@@ -1,4 +1,4 @@
-# OSvCPython
+# OSvCPython (Unmaintained)
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/8bc7c1d010a26c36a70a/maintainability)](https://codeclimate.com/github/rajangdavis/osvc_python/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/8bc7c1d010a26c36a70a/test_coverage)](https://codeclimate.com/github/rajangdavis/osvc_python/test_coverage)
